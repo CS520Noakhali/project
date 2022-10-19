@@ -12,6 +12,16 @@ abstract class ItemComponent {
     private int width;
     private int height;
 
+    public ItemComponent(String name, int price, int x, int y, int length, int width, int height) {
+        this.name = name;
+        this.price = price;
+        this.xCoordinate = x;
+        this.yCoordinate = y;
+        this.length = length;
+        this.width = width;
+        this.height = height;
+    }
+
     // ****************************
     //    non- abstract methods
     // ***************************
@@ -72,6 +82,11 @@ abstract class ItemComponent {
         this.price = newPrice;
     }
 
+    @Override
+    public String toString() {
+        return this.name;
+    }
+
 
 
     // ****************************
@@ -85,6 +100,7 @@ abstract class ItemComponent {
     abstract void addItemContainer(ItemContainer newItemContainer);
         
     // For Item class - just delete item. Fot ItemContainer - delete container and all items that were inside it.
+    // Should not be able to remove a drone and root.
     abstract void delete();
 
 
