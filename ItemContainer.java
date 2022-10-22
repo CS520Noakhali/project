@@ -27,10 +27,8 @@ public class ItemContainer extends ItemComponent {
 
     // Delete all content of the item Container
     @Override
-    public void delete() {
-        for (ItemComponent itemComponent : itemComponentList) {
-            itemComponent.delete();
-    }
+    public void delete(ItemComponent itemComponent) {
+        itemComponentList.remove(itemComponent);
 }
 
     
