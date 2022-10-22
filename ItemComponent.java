@@ -93,9 +93,8 @@ abstract class ItemComponent {
     // ***************************
 
     
-    abstract void addItem(Item newItem);
     
-    abstract void addItemContainer(ItemContainer newItemContainer);
+    abstract void add(ItemComponent itemComponent);
         
     abstract void delete(ItemComponent itemComponent);
 

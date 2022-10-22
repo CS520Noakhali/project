@@ -14,15 +14,10 @@ public class ItemContainer extends ItemComponent {
 
     // add new item to the selected ItemContainer
     @Override	
-    public void addItem(Item newItem) {
-        itemComponentList.add(newItem);
+    public void add(ItemComponent itemComponent) {
+        itemComponentList.add(itemComponent);
     }
 
-    // add new Item Container to the selected ItemContainer
-    @Override
-    public void addItemContainer(ItemContainer newItemContainer) {
-        itemComponentList.add(newItemContainer);
-    }
 
 
     // Delete all content of the item Container

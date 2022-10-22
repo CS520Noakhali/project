@@ -13,15 +13,10 @@ public class Item extends ItemComponent {
     }
 
     @Override
-    public void addItem(Item newItem) {
+    public void add(ItemComponent itemComponent) {
        throw new UnsupportedOperationException();
         
     }
 
-    @Override
-    public void addItemContainer(ItemContainer newItemContainer) {
-        throw new UnsupportedOperationException();
-        
-    }
 
 }
