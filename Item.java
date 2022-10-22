@@ -7,21 +7,16 @@ public class Item extends ItemComponent {
     }
 
     @Override
-    public void delete() {
-        // TODO Auto-generated method stub
+    public void delete(ItemComponent itemComponent) {
+        throw new UnsupportedOperationException();
 
     }
 
     @Override
-    public void addItem(Item newItem) {
-        // TODO Auto-generated method stub
+    public void add(ItemComponent itemComponent) {
+       throw new UnsupportedOperationException();
         
     }
 
-    @Override
-    public void addItemContainer(ItemContainer newItemContainer) {
-        // TODO Auto-generated method stub
-        
-    }
 
 }

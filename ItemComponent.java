@@ -88,20 +88,15 @@ abstract class ItemComponent {
     }
 
 
-
     // ****************************
     //       abstract methods
     // ***************************
 
-    // add new item to the selected ItemContainer
-    abstract void addItem(Item newItem);
     
-    // add new Item Container to the selected ItemContainer
-    abstract void addItemContainer(ItemContainer newItemContainer);
+    
+    abstract void add(ItemComponent itemComponent);
         
-    // For Item class - just delete item. Fot ItemContainer - delete container and all items that were inside it.
-    // Should not be able to remove a drone and root.
-    abstract void delete();
+    abstract void delete(ItemComponent itemComponent);
 
 
 
