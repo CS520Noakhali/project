@@ -12,6 +12,16 @@ abstract class ItemComponent {
     private int width;
     private int height;
 
+    public ItemComponent(String name, int price, int x, int y, int length, int width, int height) {
+        this.name = name;
+        this.price = price;
+        this.xCoordinate = x;
+        this.yCoordinate = y;
+        this.length = length;
+        this.width = width;
+        this.height = height;
+    }
+
     // ****************************
     //    non- abstract methods
     // ***************************
@@ -72,20 +82,21 @@ abstract class ItemComponent {
         this.price = newPrice;
     }
 
+    @Override
+    public String toString() {
+        return this.name;
+    }
 
 
     // ****************************
     //       abstract methods
     // ***************************
 
-    // add new item to the selected ItemContainer
-    abstract void addItem(Item newItem);
     
-    // add new Item Container to the selected ItemContainer
-    abstract void addItemContainer(ItemContainer newItemContainer);
+    
+    abstract void add(ItemComponent itemComponent);
         
-    // For Item class - just delete item. Fot ItemContainer - delete container and all items that were inside it.
-    abstract void delete();
+    abstract void delete(ItemComponent itemComponent);
 
 
 
