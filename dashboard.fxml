@@ -21,6 +21,11 @@
                         <Font size="24.0" />
                      </font>
                   </Label>
+                  <Label fx:id="testLabel" alignment="CENTER" contentDisplay="CENTER" layoutX="658.0" layoutY="8.0" prefHeight="30.0" prefWidth="255.0" text="TEST" textAlignment="CENTER" textFill="RED" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="658.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <font>
+                        <Font size="24.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
@@ -29,7 +34,7 @@
                     <items>
                       <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                            <children>
-                              <SplitPane dividerPositions="0.75" layoutX="215.0" layoutY="284.0" orientation="VERTICAL" prefHeight="798.0" prefWidth="590.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <SplitPane dividerPositions="0.8084033613445379" layoutX="215.0" layoutY="284.0" orientation="VERTICAL" prefHeight="798.0" prefWidth="590.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                 <items>
                                   <AnchorPane minHeight="0.0" minWidth="-Infinity" prefHeight="100.0" prefWidth="300.0">
                                        <children>
@@ -46,16 +51,27 @@
                                                 </AnchorPane>
                                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                                                    <children>
-                                                      <SplitPane dividerPositions="0.6588021778584392" layoutX="44.0" layoutY="190.0" orientation="VERTICAL" prefHeight="553.0" prefWidth="301.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                      <SplitPane dividerPositions="0.6414881623449832" layoutX="44.0" layoutY="190.0" orientation="VERTICAL" prefHeight="553.0" prefWidth="301.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                         <items>
                                                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                                                                <children>
-                                                                  <TreeView fx:id="treeView" onContextMenuRequested="#showContextMenu" onMouseClicked="#selectItem" prefHeight="360.0" prefWidth="299.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0" />
+                                                                  <VBox layoutX="-17.0" layoutY="75.0" prefHeight="324.0" prefWidth="296.6666666666667" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                     <children>
+                                                                        <TreeView fx:id="treeView" onMouseClicked="#selectItem" prefHeight="360.0" prefWidth="299.0" />
+                                                                        <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="300.0">
+                                                                           <children>
+                                                                              <Button fx:id="addItemButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onAddItemButtonClick" prefHeight="30.0" prefWidth="100.0" text="Add Item" />
+                                                                              <Button fx:id="addItemContainerButton" mnemonicParsing="false" onAction="#onAddItemContainerButtonClick" prefHeight="30.0" prefWidth="100.0" text="Add Container" />
+                                                                              <Button fx:id="deleteItemButton" mnemonicParsing="false" onAction="#onDeleteItemButtonClick" prefHeight="30.0" prefWidth="100.0" text="Delete" />
+                                                                           </children>
+                                                                        </HBox>
+                                                                     </children>
+                                                                  </VBox>
                                                                </children>
                                                             </AnchorPane>
                                                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                                                                <children>
-                                                                  <VBox prefHeight="264.0" prefWidth="303.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                                  <VBox prefHeight="264.0" prefWidth="297.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                                      <children>
                                                                         <Label alignment="CENTER" prefHeight="27.0" prefWidth="308.0" text="Item Information" textAlignment="CENTER">
                                                                            <font>
@@ -72,7 +88,15 @@
                                                                                           <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="51.0" text="  Name:" />
                                                                                           <TextField fx:id="nameTextField" prefHeight="30.0" prefWidth="150.0" />
                                                                                           <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="40.0" text="  Price:" />
-                                                                                          <TextField fx:id="priceTextField" prefHeight="30.0" prefWidth="55.0" />
+                                                                                          <TextField fx:id="priceTextField" prefHeight="30.0" prefWidth="50.0" />
+                                                                                       </children>
+                                                                                    </HBox>
+                                                                                    <HBox maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="300.0">
+                                                                                       <children>
+                                                                                          <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="51.0" text="  Name:" />
+                                                                                          <TextField fx:id="nameTextField1" prefHeight="30.0" prefWidth="150.0" />
+                                                                                          <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="40.0" text="  Price:" />
+                                                                                          <TextField fx:id="priceTextField1" prefHeight="30.0" prefWidth="50.0" />
                                                                                        </children>
                                                                                     </HBox>
                                                                                  </children>
@@ -111,8 +135,15 @@
                                                                                     <TextField fx:id="heightTextField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="75.0" />
                                                                                  </children>
                                                                               </HBox>
+                                                                              <HBox maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="10.0" prefWidth="300.0" />
                                                                            </children>
                                                                         </VBox>
+                                                                        <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="300.0">
+                                                                           <children>
+                                                                              <Button fx:id="editItemInfoButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onEditItemInfoButtonClick" prefHeight="30.0" prefWidth="150.0" text="Edit" />
+                                                                              <Button fx:id="saveItemInfoButton" mnemonicParsing="false" onAction="#onSaveItemInfoButtonClick" prefHeight="30.0" prefWidth="150.0" text="Save" />
+                                                                           </children>
+                                                                        </HBox>
                                                                      </children>
                                                                   </VBox>
                                                                </children>
@@ -139,16 +170,29 @@
                                                 </AnchorPane>
                                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                                                    <children>
-                                                      <Button layoutX="125.0" layoutY="66.0" mnemonicParsing="false" prefHeight="156.0" prefWidth="150.0" text="Visit Item" textAlignment="CENTER" wrapText="true" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="151.0" AnchorPane.topAnchor="0.0">
-                                                         <font>
-                                                            <Font size="24.0" />
-                                                         </font>
-                                                      </Button>
-                                                      <Button layoutX="150.0" mnemonicParsing="false" prefHeight="156.0" prefWidth="150.0" text="Scan Farm" textAlignment="CENTER" wrapText="true">
-                                                         <font>
-                                                            <Font size="24.0" />
-                                                         </font>
-                                                      </Button>
+                                                      <VBox layoutX="99.0" layoutY="-10.0" prefHeight="154.66666666666666" prefWidth="298.6666666666667" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                         <children>
+                                                            <HBox prefHeight="100.0" prefWidth="200.0">
+                                                               <children>
+                                                                  <Button fx:id="visitItemButton" mnemonicParsing="false" onAction="#onVisitItemButtonClick" prefHeight="156.0" prefWidth="150.0" text="Visit Item" textAlignment="CENTER" wrapText="true">
+                                                                     <font>
+                                                                        <Font size="24.0" />
+                                                                     </font>
+                                                                  </Button>
+                                                                  <Button fx:id="scanFarmButton" mnemonicParsing="false" onAction="#onScanFarmButtonClick" prefHeight="156.0" prefWidth="150.0" text="Scan Farm" textAlignment="CENTER" wrapText="true">
+                                                                     <font>
+                                                                        <Font size="24.0" />
+                                                                     </font>
+                                                                  </Button>
+                                                               </children>
+                                                            </HBox>
+                                                            <Button fx:id="returnHomeButton" mnemonicParsing="false" onAction="#onReturnHomeButtonClick" prefHeight="50.0" prefWidth="300.0" text="Return Home" textAlignment="CENTER" wrapText="true">
+                                                               <font>
+                                                                  <Font size="24.0" />
+                                                               </font>
+                                                            </Button>
+                                                         </children>
+                                                      </VBox>
                                                    </children>
                                                 </AnchorPane>
                                             </items>
