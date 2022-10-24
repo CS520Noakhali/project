@@ -3,6 +3,8 @@ import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+
 import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
@@ -33,6 +35,13 @@ public class DashboardController implements Initializable{
 
     @FXML
     private TextField yCoordTextField;
+
+    @FXML 
+    private TextField heightTextField;
+
+    @FXML
+    private Button saveItemInfoButton;
+
 
 
     // Method that shows item information pane. Use item getter methods.
@@ -159,6 +168,23 @@ void onDeleteItemButtonClick(ActionEvent event) {
 
 @FXML
 void onEditItemInfoButtonClick(ActionEvent event) {
+    
+    // Get currently selected directory TreeItem 
+   TreeItem<ItemComponent> selectedTreeItem = treeView.getSelectionModel().getSelectedItem();
+   // Get the Item corresponding to the current directory TreeItem
+   selectedTreeItem.getValue().setName(nameTextField.getText());
+   selectedTreeItem.getValue().setHeight(Integer.parseInt(heightTextField.getText()));
+   selectedTreeItem.getValue().setLength(Integer.parseInt(lengthTextField.getText()));
+   selectedTreeItem.getValue().setWidth(Integer.parseInt(widthTextField.getText()));
+   selectedTreeItem.getValue().setXcoordinate(Integer.parseInt(xCoordTextField.getText()));
+   selectedTreeItem.getValue().setYcoordinate(Integer.parseInt(yCoordTextField.getText()));
+   selectedTreeItem.getValue().setPrice(Integer.parseInt(priceTextField.getText()));
+
+   
+   
+
+   
+
 
 }
 
@@ -169,6 +195,20 @@ void onReturnHomeButtonClick(ActionEvent event) {
 
 @FXML
 void onSaveItemInfoButtonClick(ActionEvent event) {
+    
+    TreeItem<ItemComponent> selectedTreeItem = treeView.getSelectionModel().getSelectedItem();
+    selectedTreeItem.getValue().setName(nameTextField.getText());
+    selectedTreeItem.getValue().setHeight(Integer.parseInt(heightTextField.getText()));
+    selectedTreeItem.getValue().setLength(Integer.parseInt(lengthTextField.getText()));
+    selectedTreeItem.getValue().setWidth(Integer.parseInt(widthTextField.getText()));
+    selectedTreeItem.getValue().setXcoordinate(Integer.parseInt(xCoordTextField.getText()));
+    selectedTreeItem.getValue().setYcoordinate(Integer.parseInt(yCoordTextField.getText()));
+    selectedTreeItem.getValue().setPrice(Integer.parseInt(priceTextField.getText()));
+ 
+    
+
+
+
 
 }
 
@@ -180,11 +220,27 @@ void onScanFarmButtonClick(ActionEvent event) {
 @FXML
 void onVisitItemButtonClick(ActionEvent event) {
 
+
 }
 
 
 @FXML
 void selectItem(MouseEvent event) {
+
+   // Get currently selected directory TreeItem 
+   TreeItem<ItemComponent> selectedTreeItem = treeView.getSelectionModel().getSelectedItem();
+   // Get the Item corresponding to the current directory TreeItem and set it in the textFields
+   nameTextField.setText(selectedTreeItem.getValue().getName());
+   lengthTextField.setText(Integer.toString(selectedTreeItem.getValue().getLength()));
+   priceTextField.setText(Integer.toString(selectedTreeItem.getValue().getPrice()));
+   widthTextField.setText(Integer.toString(selectedTreeItem.getValue().getWidth()));
+   xCoordTextField.setText(Integer.toString(selectedTreeItem.getValue().getXcoordinate()));
+   yCoordTextField.setText(Integer.toString(selectedTreeItem.getValue().getYcoordinate()));
+   heightTextField.setText(Integer.toString(selectedTreeItem.getValue().getHeight()));
+   
+
+
+   /* selectedItem */
 
 }
     
