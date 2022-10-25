@@ -1,4 +1,4 @@
-package com.example.drone;
+package drone_animation;
 
 import javafx.animation.TranslateTransition;
 import javafx.fxml.FXML;
