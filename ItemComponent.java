@@ -63,7 +63,7 @@ abstract class ItemComponent {
     }
 
     public void setWidth(int newWidth) {
-        this.length = newWidth;
+        this.width = newWidth;
     }
 
     public int getHeight() {
