@@ -5,8 +5,11 @@
 <?import javafx.scene.control.SplitPane?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.TreeView?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
@@ -140,7 +143,6 @@
                                                                         </VBox>
                                                                         <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="300.0">
                                                                            <children>
-                                                                              <Button fx:id="editItemInfoButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onEditItemInfoButtonClick" prefHeight="30.0" prefWidth="150.0" text="Edit" />
                                                                               <Button fx:id="saveItemInfoButton" mnemonicParsing="false" onAction="#onSaveItemInfoButtonClick" prefHeight="30.0" prefWidth="150.0" text="Save" />
                                                                            </children>
                                                                         </HBox>
@@ -174,19 +176,19 @@
                                                          <children>
                                                             <HBox prefHeight="100.0" prefWidth="200.0">
                                                                <children>
-                                                                  <Button fx:id="visitItemButton" mnemonicParsing="false" onAction="#onVisitItemButtonClick" prefHeight="156.0" prefWidth="150.0" text="Visit Item" textAlignment="CENTER" wrapText="true">
+                                                                  <Button fx:id="visitItemButton" mnemonicParsing="false" onMouseClicked="#onVisitItemButtonClick" prefHeight="156.0" prefWidth="150.0" text="Visit Item" textAlignment="CENTER" wrapText="true">
                                                                      <font>
                                                                         <Font size="24.0" />
                                                                      </font>
                                                                   </Button>
-                                                                  <Button fx:id="scanFarmButton" mnemonicParsing="false" onAction="#onScanFarmButtonClick" prefHeight="156.0" prefWidth="150.0" text="Scan Farm" textAlignment="CENTER" wrapText="true">
+                                                                  <Button fx:id="scanFarmButton" mnemonicParsing="false" onMouseClicked="#onScanFarmButtonClick" prefHeight="156.0" prefWidth="150.0" text="Scan Farm" textAlignment="CENTER" wrapText="true">
                                                                      <font>
                                                                         <Font size="24.0" />
                                                                      </font>
                                                                   </Button>
                                                                </children>
                                                             </HBox>
-                                                            <Button fx:id="returnHomeButton" mnemonicParsing="false" onAction="#onReturnHomeButtonClick" prefHeight="50.0" prefWidth="300.0" text="Return Home" textAlignment="CENTER" wrapText="true">
+                                                            <Button fx:id="returnHomeButton" mnemonicParsing="false" onMouseClicked="#onReturnHomeButtonClick" prefHeight="50.0" prefWidth="300.0" text="Return Home" textAlignment="CENTER" wrapText="true">
                                                                <font>
                                                                   <Font size="24.0" />
                                                                </font>
@@ -203,7 +205,18 @@
                               </SplitPane>
                            </children>
                         </AnchorPane>
-                      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="600.0" />
+                      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="600.0">
+                           <children>
+                              <Pane layoutX="-4.0" layoutY="-8.0" minHeight="800.0" minWidth="600.0" prefHeight="816.0" prefWidth="612.0">
+                                 <children>
+                                    <ImageView fx:id="droneImage" fitHeight="93.0" fitWidth="86.0" layoutX="31.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@drone.png" />
+                                       </image>
+                                    </ImageView>
+                                 </children>
+                              </Pane>
+                           </children></AnchorPane>
                     </items>
                   </SplitPane>
                </children>

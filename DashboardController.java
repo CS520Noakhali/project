@@ -1,12 +1,28 @@
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
+
+import javafx.animation.TranslateTransition;
+import javafx.animation.Animation;
+import javafx.animation.PathTransition;
+import javafx.animation.SequentialTransition;
+import javafx.scene.shape.HLineTo;
+import javafx.scene.shape.MoveTo;
+import javafx.scene.shape.Path;
+import javafx.scene.shape.Polyline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.shape.VLineTo;
+import javafx.util.Duration;
 
 public class DashboardController implements Initializable{
 
@@ -33,6 +49,14 @@ public class DashboardController implements Initializable{
 
     @FXML
     private TextField yCoordTextField;
+    
+    @FXML
+    private ImageView droneImage;
+
+    @FXML
+    private  TextField heightTextField;
+
+    int x_final_coord, y_final_coord = 0;
 
 
     // Method that shows item information pane. Use item getter methods.
@@ -157,36 +181,104 @@ void onDeleteItemButtonClick(ActionEvent event) {
 
 }
 
-@FXML
-void onEditItemInfoButtonClick(ActionEvent event) {
-
-}
-
-@FXML
-void onReturnHomeButtonClick(ActionEvent event) {
-
-}
 
 @FXML
 void onSaveItemInfoButtonClick(ActionEvent event) {
-
+    TreeItem<ItemComponent> selectedTreeItem = treeView.getSelectionModel().getSelectedItem();
+    selectedTreeItem.getValue().setName(nameTextField.getText());
+    selectedTreeItem.getValue().setHeight(Integer.parseInt(heightTextField.getText()));
+    selectedTreeItem.getValue().setLength(Integer.parseInt(lengthTextField.getText()));
+    selectedTreeItem.getValue().setWidth(Integer.parseInt(widthTextField.getText()));
+    selectedTreeItem.getValue().setXcoordinate(Integer.parseInt(xCoordTextField.getText()));
+    selectedTreeItem.getValue().setYcoordinate(Integer.parseInt(yCoordTextField.getText()));
+    selectedTreeItem.getValue().setPrice(Integer.parseInt(priceTextField.getText()));
+    treeView.refresh();
 }
 
 @FXML
-void onScanFarmButtonClick(ActionEvent event) {
 
+void onReturnHomeButtonClick() {
+    TranslateTransition translate = new TranslateTransition();
+        translate.setNode(droneImage);
+        translate.setDuration(Duration.millis(1));
+        translate.setByX(x_final_coord*(-1));
+        translate.setByY(y_final_coord*(-1));
+
+        translate.play();
+        x_final_coord = 0;
+        y_final_coord = 0;
+
+        System.out.println("return to origin!");
 }
 
 @FXML
-void onVisitItemButtonClick(ActionEvent event) {
+void onScanFarmButtonClick() {
+    int[][] coordinates = {{0, 700}, {100, 0}, {0, -700}, {100, 0}, {0, 700}, {100, 0}, {0, -700}, {100, 0}, {0, 700}, {100, 0}, {0, -700}
+    };
+
+    SequentialTransition master = new SequentialTransition();
+
+    ArrayList<TranslateTransition> lst1 = new ArrayList<>();
+    for (int i = 0;i<coordinates.length;i++){
+    TranslateTransition translate = new TranslateTransition();
+    translate.setNode(droneImage);
+    int[] arr = coordinates[i];
+    int x = arr[0];
+    int y = arr[1];
+    translate.setDuration((Duration.millis(1000)));
+    translate.setByX(x);
+    translate.setByY(y);
+    x_final_coord += x;
+    y_final_coord += y;
+    lst1.add(translate);
+    }
+
+    for (TranslateTransition t: lst1){
+    master.getChildren().add(t);
+    }
+    master.play();
+    System.out.println("take-off");
+}
+
+@FXML
+void onVisitItemButtonClick() {
+    int x = Integer.parseInt(xCoordTextField.getText());
+    int y = Integer.parseInt(yCoordTextField.getText());
+
+    //translate
+    TranslateTransition translate = new TranslateTransition();
+    translate.setNode(droneImage);
+    translate.setDuration(Duration.millis(500));
+    translate.setByX(x);
+    translate.setByY(y);
+    translate.play();
+
+    x_final_coord += x;
+    y_final_coord += y;
+
+    System.out.println("x coord: " + x);
+    System.out.println("y coord: " + y);
+    System.out.println("Flying!");
 
 }
 
 
 @FXML
 void selectItem(MouseEvent event) {
-
+     
+    // Get currently selected directory TreeItem 
+   TreeItem<ItemComponent> selectedTreeItem = treeView.getSelectionModel().getSelectedItem();
+   // Get the Item corresponding to the current directory TreeItem and set it in the textFields
+   nameTextField.setText(selectedTreeItem.getValue().getName());
+   lengthTextField.setText(Integer.toString(selectedTreeItem.getValue().getLength()));
+   priceTextField.setText(Integer.toString(selectedTreeItem.getValue().getPrice()));
+   widthTextField.setText(Integer.toString(selectedTreeItem.getValue().getWidth()));
+   xCoordTextField.setText(Integer.toString(selectedTreeItem.getValue().getXcoordinate()));
+   yCoordTextField.setText(Integer.toString(selectedTreeItem.getValue().getYcoordinate()));
+   heightTextField.setText(Integer.toString(selectedTreeItem.getValue().getHeight()));
+   
 }
     
+
 
 }
