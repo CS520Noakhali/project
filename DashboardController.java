@@ -24,7 +24,25 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.VLineTo;
 import javafx.util.Duration;
 
+
 public class DashboardController implements Initializable{
+
+    // private static instance of DashboardController class. Using lazy singleton
+    private static DashboardController dashboardController = null;
+
+    // private constructor
+    private DashboardController() {
+
+    }
+
+    // public methods that allows other classes to get singleton instance of DashboardController.
+    // Use lazy singleton model
+    public static DashboardController getInstance() {
+    if (dashboardController == null) {
+        dashboardController = new DashboardController();
+    }
+    return dashboardController;
+    }
 
     //TreeView to implement directory of items stored at the farm
     @FXML
