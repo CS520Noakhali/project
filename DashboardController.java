@@ -50,14 +50,6 @@ public class DashboardController implements Initializable{
     @FXML
     private TextField yCoordTextField;
     
-
-    @FXML
-    private ImageView droneImage;
-
-
-    @FXML 
-    private TextField heightTextField;
-
     @FXML
     private ImageView droneImage;
 
@@ -189,30 +181,8 @@ void onDeleteItemButtonClick(ActionEvent event) {
 
 }
 
-@FXML
-void onEditItemInfoButtonClick(ActionEvent event) {
-
-
-    TreeItem<ItemComponent> selectedTreeItem = treeView.getSelectionModel().getSelectedItem();
-    selectedTreeItem.getValue().setName(nameTextField.getText());
-    selectedTreeItem.getValue().setHeight(Integer.parseInt(heightTextField.getText()));
-    selectedTreeItem.getValue().setLength(Integer.parseInt(lengthTextField.getText()));
-    selectedTreeItem.getValue().setWidth(Integer.parseInt(widthTextField.getText()));
-    selectedTreeItem.getValue().setXcoordinate(Integer.parseInt(xCoordTextField.getText()));
-    selectedTreeItem.getValue().setYcoordinate(Integer.parseInt(yCoordTextField.getText()));
-    selectedTreeItem.getValue().setPrice(Integer.parseInt(priceTextField.getText()));
-
-   
-   
-
-   
-
-
-}
-
 
 @FXML
-
 void onSaveItemInfoButtonClick(ActionEvent event) {
     TreeItem<ItemComponent> selectedTreeItem = treeView.getSelectionModel().getSelectedItem();
     selectedTreeItem.getValue().setName(nameTextField.getText());
@@ -222,10 +192,8 @@ void onSaveItemInfoButtonClick(ActionEvent event) {
     selectedTreeItem.getValue().setXcoordinate(Integer.parseInt(xCoordTextField.getText()));
     selectedTreeItem.getValue().setYcoordinate(Integer.parseInt(yCoordTextField.getText()));
     selectedTreeItem.getValue().setPrice(Integer.parseInt(priceTextField.getText()));
-
+    treeView.refresh();
 }
-
-
 
 @FXML
 
@@ -263,17 +231,16 @@ void onScanFarmButtonClick() {
     x_final_coord += x;
     y_final_coord += y;
     lst1.add(translate);
-}
+    }
 
-for (TranslateTransition t: lst1){
-master.getChildren().add(t);
-}
-master.play();
-System.out.println("take-off");
+    for (TranslateTransition t: lst1){
+    master.getChildren().add(t);
+    }
+    master.play();
+    System.out.println("take-off");
 }
 
 @FXML
-
 void onVisitItemButtonClick() {
     int x = Integer.parseInt(xCoordTextField.getText());
     int y = Integer.parseInt(yCoordTextField.getText());
@@ -310,9 +277,6 @@ void selectItem(MouseEvent event) {
    yCoordTextField.setText(Integer.toString(selectedTreeItem.getValue().getYcoordinate()));
    heightTextField.setText(Integer.toString(selectedTreeItem.getValue().getHeight()));
    
-
-   
-
 }
     
 

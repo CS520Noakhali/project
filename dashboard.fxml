@@ -143,7 +143,6 @@
                                                                         </VBox>
                                                                         <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="300.0">
                                                                            <children>
-                                                                              <Button fx:id="editItemInfoButton" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#onEditItemInfoButtonClick" prefHeight="30.0" prefWidth="150.0" text="Edit" />
                                                                               <Button fx:id="saveItemInfoButton" mnemonicParsing="false" onAction="#onSaveItemInfoButtonClick" prefHeight="30.0" prefWidth="150.0" text="Save" />
                                                                            </children>
                                                                         </HBox>
