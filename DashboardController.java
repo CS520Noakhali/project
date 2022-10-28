@@ -166,52 +166,10 @@ void onAddItemButtonClick(ActionEvent event) {
 
 	String name = null; 
 	int price, x,y, length, width, height;
-	price =x=y=length=width=height=0;
+	price=length =0;
+	x=y=100;
+	width=height=20;
 	
-	try {
-		name= nameTextField.getText();
-	} catch (Exception e) {
-		System.out.println("name filed error");
-	}
-	
-	try {
-		
-		price=Integer.parseInt(priceTextField.getText());
-		
-	}catch (Exception e) {
-		System.out.println("price filed error");
-	}
-	
-	try {
-		x=Integer.parseInt(xCoordTextField.getText());
-	}catch (Exception e) {
-		System.out.println("x coordinate filed error");
-	}
-	
-	try {
-		y=Integer.parseInt(yCoordTextField.getText());
-	}catch (Exception e) {
-		System.out.println("y coordinate filed error");
-	}
-	
-	try {
-		length=Integer.parseInt(lengthTextField.getText());
-	} catch (Exception e) {
-		System.out.println("length filed error");
-	}
-	 
-	try {
-		width=Integer.parseInt(widthTextField.getText());
-	}catch (Exception e) {
-		System.out.println("width filed error");
-	}
-	
-	try {
-		height=Integer.parseInt(heightTextField.getText());
-	}
-	catch (Exception e) {
-		System.out.println("height filed error");
-	}
 	
 	
 	// add image to farm_pane
@@ -220,7 +178,7 @@ void onAddItemButtonClick(ActionEvent event) {
 	
 	
     // a. First, create new Item and corresponding TreeItem
-    ItemComponent newItem =  new Item(name, price, x, y, length, width, height,testview1);
+    ItemComponent newItem =  new Item("New item component", price, x, y, length, width, height,testview1);
     TreeItem<ItemComponent> newTreeItem = new TreeItem<>(newItem);
     
     
@@ -296,6 +254,10 @@ void onDeleteItemButtonClick(ActionEvent event) {
     TreeItem<ItemComponent> selectedTreeItem = treeView.getSelectionModel().getSelectedItem();
     // Get the Item corresponding to the current directory TreeItem
     ItemComponent selectedItem = selectedTreeItem.getValue();
+
+    // remove from pane
+    farm_pane.getChildren().remove(selectedItem.getImageView());
+
 
     // Get the parent of the selected TreeItem
     TreeItem<ItemComponent> parentTreeItem = selectedTreeItem.getParent();
