@@ -13,7 +13,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+<<<<<<< HEAD
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="838.0" prefWidth="915.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+=======
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="838.0" prefWidth="915.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+>>>>>>> 7af1e57fa7e91971d8b3acaecf989a2e459630c9
    <children>
       <SplitPane dividerPositions="0.04" orientation="VERTICAL" prefHeight="830.0" prefWidth="1200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
@@ -207,7 +211,11 @@
                         </AnchorPane>
                       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="600.0">
                            <children>
+<<<<<<< HEAD
                               <Pane fx:id="farm_pane" layoutX="-4.0" layoutY="-8.0" minHeight="800.0" minWidth="600.0" prefHeight="816.0" prefWidth="612.0">
+=======
+                              <Pane layoutX="-4.0" layoutY="-8.0" minHeight="800.0" minWidth="600.0" prefHeight="816.0" prefWidth="612.0">
+>>>>>>> 7af1e57fa7e91971d8b3acaecf989a2e459630c9
                                  <children>
                                     <ImageView fx:id="droneImage" fitHeight="93.0" fitWidth="86.0" layoutX="31.0" layoutY="27.0" pickOnBounds="true" preserveRatio="true">
                                        <image>
