@@ -178,7 +178,7 @@ void onAddItemButtonClick(ActionEvent event) {
 	
 	
     // a. First, create new Item and corresponding TreeItem
-    ItemComponent newItem =  new Item("New item component", price, x, y, length, width, height,testview1);
+    ItemComponent newItem =  new Item("New item", price, x, y, length, width, height,testview1);
     TreeItem<ItemComponent> newTreeItem = new TreeItem<>(newItem);
     
     
