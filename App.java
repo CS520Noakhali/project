@@ -1,7 +1,4 @@
-<<<<<<< HEAD
-package application;
-=======
->>>>>>> 7af1e57fa7e91971d8b3acaecf989a2e459630c9
+
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;

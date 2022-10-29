@@ -1,8 +1,5 @@
-<<<<<<< HEAD
-package application;
 
-=======
->>>>>>> 7af1e57fa7e91971d8b3acaecf989a2e459630c9
+
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
@@ -28,11 +25,8 @@ import javafx.scene.input.MouseEvent;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.VLineTo;
 import javafx.util.Duration;
-<<<<<<< HEAD
 import javafx.scene.layout.Pane;
 import javafx.scene.image.Image;
-=======
->>>>>>> 7af1e57fa7e91971d8b3acaecf989a2e459630c9
 
 
 public class DashboardController implements Initializable{
@@ -83,12 +77,9 @@ public class DashboardController implements Initializable{
 
     @FXML
     private  TextField heightTextField;
-<<<<<<< HEAD
     
     @FXML
     private Pane farm_pane;
-=======
->>>>>>> 7af1e57fa7e91971d8b3acaecf989a2e459630c9
 
     int x_final_coord, y_final_coord = 0;
 
@@ -114,7 +105,6 @@ public class DashboardController implements Initializable{
     public void initialize(URL location, ResourceBundle resources) {
 
     // *********  Set up tree view *******************
-<<<<<<< HEAD
     	ImageView dummy = null;
     	
 		
@@ -128,13 +118,6 @@ public class DashboardController implements Initializable{
         ItemComponent rootIC = new ItemContainer("root", 0, 0, 0, 0, 0, 0, dummy);
         ItemComponent commCenterIC = new ItemContainer("command center", 0, 400, 400, 0, 60,60, com_centre_view);
         ItemComponent droneIC = new Drone("drone", 0, 400,	400, 0,  60, 60,drone_view);
-=======
-
-        // a. Create root, command center and drone ItemComponents. 
-        ItemComponent rootIC = new ItemContainer("root", 0, 0, 0, 0, 0, 0);
-        ItemComponent commCenterIC = new ItemContainer("command center", 0, 0, 0, 0, 0, 0);
-        ItemComponent droneIC = new Drone("drone", 0, 0, 0, 0, 0, 0);
->>>>>>> 7af1e57fa7e91971d8b3acaecf989a2e459630c9
         rootIC.add(commCenterIC);
         commCenterIC.add(droneIC);
         
@@ -143,17 +126,12 @@ public class DashboardController implements Initializable{
         TreeItem<ItemComponent> commandCenter = new TreeItem<>(commCenterIC);
         TreeItem<ItemComponent> drone = new TreeItem<>(droneIC);
 
-<<<<<<< HEAD
         // c. add root, command center and drone to the TreeView
-=======
-        // b. add root, command center and drone to the TreeView
->>>>>>> 7af1e57fa7e91971d8b3acaecf989a2e459630c9
         root.setExpanded(true);
         root.getChildren().add(commandCenter);
         commandCenter.getChildren().add(drone);
         commandCenter.setExpanded(true);
         treeView.setRoot(root);
-<<<<<<< HEAD
         
         
         // d. set drone on pane
@@ -177,8 +155,6 @@ public class DashboardController implements Initializable{
         commCenterIC.getImageView().setOpacity(0.5);
         farm_pane.getChildren().add(commCenterIC.getImageView());
         
-=======
->>>>>>> 7af1e57fa7e91971d8b3acaecf989a2e459630c9
 
     }
 
@@ -188,7 +164,6 @@ ADD ITEM functionality
 @FXML
 void onAddItemButtonClick(ActionEvent event) {
 
-<<<<<<< HEAD
 	String name = null; 
 	int price, x,y, length, width, height;
 	price=length =0;
@@ -221,11 +196,6 @@ void onAddItemButtonClick(ActionEvent event) {
     
    
     
-=======
-    // a. First, create new Item and corresponding TreeItem
-    ItemComponent newItem =  new Item("New Item", 0, 0, 0, 0, 0, 0);
-    TreeItem<ItemComponent> newTreeItem = new TreeItem<>(newItem);
->>>>>>> 7af1e57fa7e91971d8b3acaecf989a2e459630c9
 
     // b. Next, we will update TreeView 
 
@@ -249,17 +219,11 @@ ADD ITEM CONTAINER functionality
  */
 @FXML
 void onAddItemContainerButtonClick(ActionEvent event) {
-<<<<<<< HEAD
 	
 	ImageView dummy = null;
 
         // a. First, create new ItemContainer and corresponding TreeItem
         ItemComponent newItemContainer =  new ItemContainer("New Item Container", 0, 0, 0, 0, 0, 0, dummy);
-=======
-
-        // a. First, create new ItemContainer and corresponding TreeItem
-        ItemComponent newItemContainer =  new ItemContainer("New Item Container", 0, 0, 0, 0, 0, 0);
->>>>>>> 7af1e57fa7e91971d8b3acaecf989a2e459630c9
         TreeItem<ItemComponent> newTreeItemContainer = new TreeItem<>(newItemContainer);
     
         // b. Next, we will update TreeView 
@@ -291,13 +255,10 @@ void onDeleteItemButtonClick(ActionEvent event) {
     // Get the Item corresponding to the current directory TreeItem
     ItemComponent selectedItem = selectedTreeItem.getValue();
 
-<<<<<<< HEAD
     // remove from pane
     farm_pane.getChildren().remove(selectedItem.getImageView());
 
 
-=======
->>>>>>> 7af1e57fa7e91971d8b3acaecf989a2e459630c9
     // Get the parent of the selected TreeItem
     TreeItem<ItemComponent> parentTreeItem = selectedTreeItem.getParent();
     // Get the Item corresponding to the parent
@@ -314,7 +275,6 @@ void onDeleteItemButtonClick(ActionEvent event) {
 
 @FXML
 void onSaveItemInfoButtonClick(ActionEvent event) {
-<<<<<<< HEAD
 	
 	String name = null; 
 	int price, x,y, length, width, height;
@@ -385,16 +345,6 @@ void onSaveItemInfoButtonClick(ActionEvent event) {
     
     
     
-=======
-    TreeItem<ItemComponent> selectedTreeItem = treeView.getSelectionModel().getSelectedItem();
-    selectedTreeItem.getValue().setName(nameTextField.getText());
-    selectedTreeItem.getValue().setHeight(Integer.parseInt(heightTextField.getText()));
-    selectedTreeItem.getValue().setLength(Integer.parseInt(lengthTextField.getText()));
-    selectedTreeItem.getValue().setWidth(Integer.parseInt(widthTextField.getText()));
-    selectedTreeItem.getValue().setXcoordinate(Integer.parseInt(xCoordTextField.getText()));
-    selectedTreeItem.getValue().setYcoordinate(Integer.parseInt(yCoordTextField.getText()));
-    selectedTreeItem.getValue().setPrice(Integer.parseInt(priceTextField.getText()));
->>>>>>> 7af1e57fa7e91971d8b3acaecf989a2e459630c9
     treeView.refresh();
 }
 

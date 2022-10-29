@@ -1,10 +1,7 @@
-<<<<<<< HEAD
-package application;
+
 
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
-=======
->>>>>>> 7af1e57fa7e91971d8b3acaecf989a2e459630c9
 
 // The component abstract class declares common variables and operations for both
 // composite (ItemContainer) and leaf (Item) classes.
@@ -18,7 +15,6 @@ abstract class ItemComponent {
     private int length;
     private int width;
     private int height;
-<<<<<<< HEAD
     
     @FXML
     private ImageView imageview;
@@ -27,10 +23,6 @@ abstract class ItemComponent {
     
 
     public ItemComponent(String name, int price, int x, int y, int length, int width, int height, ImageView imageview) {
-=======
-
-    public ItemComponent(String name, int price, int x, int y, int length, int width, int height) {
->>>>>>> 7af1e57fa7e91971d8b3acaecf989a2e459630c9
         this.name = name;
         this.price = price;
         this.xCoordinate = x;
@@ -38,10 +30,7 @@ abstract class ItemComponent {
         this.length = length;
         this.width = width;
         this.height = height;
-<<<<<<< HEAD
         this.imageview=imageview;
-=======
->>>>>>> 7af1e57fa7e91971d8b3acaecf989a2e459630c9
     }
 
     // ****************************
@@ -103,7 +92,6 @@ abstract class ItemComponent {
     public void setPrice(int newPrice) {
         this.price = newPrice;
     }
-<<<<<<< HEAD
     
     
     public ImageView getImageView() {
@@ -115,16 +103,12 @@ abstract class ItemComponent {
     }
     
     
-=======
-
->>>>>>> 7af1e57fa7e91971d8b3acaecf989a2e459630c9
     @Override
     public String toString() {
         return this.name;
     }
 
 
-<<<<<<< HEAD
     // debug purpose
     public void printinfo() {
     	System.out.println("Name : "+ this.getName());
@@ -133,8 +117,6 @@ abstract class ItemComponent {
     	System.out.println("price : "+ this.getPrice());
     	
     }
-=======
->>>>>>> 7af1e57fa7e91971d8b3acaecf989a2e459630c9
     // ****************************
     //       abstract methods
     // ***************************
