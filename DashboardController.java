@@ -2,30 +2,22 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javafx.animation.TranslateTransition;
-import javafx.animation.Animation;
-import javafx.animation.PathTransition;
 import javafx.animation.SequentialTransition;
-import javafx.scene.shape.HLineTo;
-import javafx.scene.shape.MoveTo;
-import javafx.scene.shape.Path;
-import javafx.scene.shape.Polyline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.ContextMenuEvent;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.shape.Rectangle;
-import javafx.scene.shape.VLineTo;
 import javafx.util.Duration;
 import javafx.scene.layout.Pane;
 import javafx.scene.image.Image;
 
-
+/*
+ * DashboardController class implemented using Singleton design pattern
+ */
 public class DashboardController implements Initializable{
 
     // private static instance of DashboardController class. Using lazy singleton
@@ -48,7 +40,6 @@ public class DashboardController implements Initializable{
     //TreeView to implement directory of items stored at the farm
     @FXML
     private TreeView<ItemComponent> treeView;   
-
 
     // Text Fields contining information about items
     @FXML
@@ -77,12 +68,12 @@ public class DashboardController implements Initializable{
 
     //GLOBAL VALUES
     int X_FINAL_COORD, Y_FINAL_COORD = 0;
-    
     int X_COORD_LIMIT_POSITIVE = 500;
     int X_COORD_LIMIT_NEGATIVE = 0;
     int Y_COORD_LIMIT_POSITIVE = 700;
     int Y_COORD_LIMIT_NEGATIVE = 0;
 
+    // variables for main components that should be visible for all methods (root, drone, command center)
     ImageView dummy = null;
     Image droneimage=  new Image(getClass().getResourceAsStream("drone.png")); 
     ImageView drone_view= new ImageView(droneimage);
@@ -92,36 +83,37 @@ public class DashboardController implements Initializable{
     ItemComponent commCenterIC = new ItemContainer("command center", 0, 400, 400, 0, 60,60, com_centre_view);
     ItemComponent droneIC = new Drone("drone", 0, 400, 400, 0,  60, 60,drone_view);
 
+
     /* 
     Initialize method: TreeView is created
     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-    // *********  Set up tree view *******************
+        // Add command center and drone to the TreeView
         rootIC.add(commCenterIC);
         commCenterIC.add(droneIC);
         
-        // b. Create corresponding TreeItems 
+        // Create corresponding TreeItems 
         TreeItem<ItemComponent> root = new TreeItem<>(rootIC);
         TreeItem<ItemComponent> commandCenter = new TreeItem<>(commCenterIC);
         TreeItem<ItemComponent> drone = new TreeItem<>(droneIC);
 
-        // c. add root, command center and drone to the TreeView
+        // Add root, command center and drone to the TreeView
         root.setExpanded(true);
         root.getChildren().add(commandCenter);
         commandCenter.getChildren().add(drone);
         commandCenter.setExpanded(true);
         treeView.setRoot(root);
         
-        // d. set drone on pane
+        // set drone image on the farm pane
         droneIC.getImageView().setX(droneIC.getXcoordinate());
         droneIC.getImageView().setY(droneIC.getYcoordinate());
         droneIC.getImageView().setFitHeight(droneIC.getHeight());
         droneIC.getImageView().setFitWidth(droneIC.getWidth());
         farm_pane.getChildren().add(droneIC.getImageView());
         
-        // e. set command center on pane
+        // set command center on the farm pane
         commCenterIC.getImageView().setX(commCenterIC.getXcoordinate());
         commCenterIC.getImageView().setY(commCenterIC.getYcoordinate());
         commCenterIC.getImageView().setFitHeight(commCenterIC.getHeight());
@@ -181,42 +173,40 @@ public class DashboardController implements Initializable{
     @FXML
     void onAddItemContainerButtonClick(ActionEvent event) {
         
-        
         int price, x,y, length, width, height;
-        price=length =0;
-        x=y=100;
-        width=height=20;
+        price = length = 0;
+        x = y = 100;
+        width = height = 20;
         
-        Image image=  new Image(getClass().getResourceAsStream("item_container.png")); 
+        // Image for the item container
+        Image image = new Image(getClass().getResourceAsStream("item_container.png")); 
         ImageView containerview= new ImageView(image);
         containerview.toBack();
 
-        // a. First, create new ItemContainer and corresponding TreeItem
+        // a. Create new ItemContainer and corresponding TreeItem
         ItemComponent newItemContainer =  new ItemContainer("New Item Container", price, x, y, length, width, height, containerview);
         TreeItem<ItemComponent> newTreeItemContainer = new TreeItem<>(newItemContainer);
         
-        
-        // set node on pane   
+        // b. set the image on the farm pane  
         newItemContainer.getImageView().setX(x);
         newItemContainer.getImageView().setY(y);
         newItemContainer.getImageView().setFitHeight(height);
         newItemContainer.getImageView().setFitWidth(width);
         farm_pane.getChildren().add(newItemContainer.getImageView());
 
-        // b. Next, we will update TreeView 
 
-        // Get currently selected directory TreeItem
+        // c. update TreeView 
+            // Get currently selected directory TreeItem
         TreeItem<ItemComponent> selectedTreeItem = treeView.getSelectionModel().getSelectedItem();
-        // Add new item to the selected TreeItem
+            // Add new item to the selected TreeItem
         selectedTreeItem.getChildren().add(newTreeItemContainer);
         newTreeItemContainer.setExpanded(true);
         treeView.getSelectionModel().select(newTreeItemContainer);
 
-        // c. Then, we will update our Composite pattern structure
-
-        // Get the Item Container corresponding to the current directory TreeItem
+        // d. Update our Composite pattern structure
+            // Get the Item Container corresponding to the current directory TreeItem
         ItemContainer selectedItemContainer = (ItemContainer)selectedTreeItem.getValue();
-        // Add item to the item container
+            // Add item to the item container
         selectedItemContainer.add(newItemContainer);
 
     }
@@ -232,9 +222,8 @@ public class DashboardController implements Initializable{
         // Get the Item corresponding to the current directory TreeItem
         ItemComponent selectedItem = selectedTreeItem.getValue();
 
-        // remove from pane
+        // remove the image of the item from the farm pane
         farm_pane.getChildren().remove(selectedItem.getImageView());
-
 
         // Get the parent of the selected TreeItem
         TreeItem<ItemComponent> parentTreeItem = selectedTreeItem.getParent();
@@ -246,10 +235,11 @@ public class DashboardController implements Initializable{
         
         // Delete item from our Composite pattern structure
         parentItem.delete(selectedItem);
-
     }
 
-
+    /*
+     * Function that saves the information about the item when the "Save" button is clicked
+     */
     @FXML
     void onSaveItemInfoButtonClick(ActionEvent event) {
         
@@ -302,7 +292,7 @@ public class DashboardController implements Initializable{
             System.out.println("height filed error");
         }
         
-        
+        // set variables to the Item Component using setters methods
         TreeItem<ItemComponent> selectedTreeItem = treeView.getSelectionModel().getSelectedItem();
         selectedTreeItem.getValue().setName(name);
         selectedTreeItem.getValue().setHeight(height);
@@ -321,23 +311,45 @@ public class DashboardController implements Initializable{
         treeView.refresh();
     }
 
+    /*
+    * Implements "Return home" functionality of the drone
+    */
     @FXML
     void onReturnHomeButtonClick() {
-        TranslateTransition translate = new TranslateTransition();
-        X_FINAL_COORD = 0;
-        Y_FINAL_COORD = 0;
 
+        int x = commCenterIC.getXcoordinate();
+        int y = commCenterIC.getYcoordinate();
+        int w = commCenterIC.getWidth();
+        int h = commCenterIC.getHeight();
+
+        //translate
         droneIC.getImageView().toFront();
+        TranslateTransition translate = new TranslateTransition();
         translate.setNode(droneIC.getImageView());
         translate.setDuration(Duration.millis(500));
-        translate.setToX(X_FINAL_COORD);
-        translate.setToY(Y_FINAL_COORD);
-        
+
+        x = (int) x + w/2 - 30; //centering drone over the item
+        y = (int) y + h/2 - 30; //centering drone over item
+
+        int deltaX = x - droneIC.getXcoordinate();
+        int deltaY = y - droneIC.getYcoordinate();
+
+        translate.setByX(deltaX);
+        translate.setByY(deltaY);
         translate.play();
-        System.out.println("return to origin!");
+
+        // update drone's coordinates
+        droneIC.setXcoordinate(x);
+        droneIC.setYcoordinate(y);
+
+        System.out.println("return to command center");
+
     }
 
 
+    /*
+     * Function that implements "Scan farm" functionality for the drone
+     */
     @FXML
     void onScanFarmButtonClick() {
 
@@ -377,8 +389,6 @@ public class DashboardController implements Initializable{
             int x = arr[0];
             int y = arr[1];
             
-            
-
             translate.setNode(droneIC.getImageView());
             translate.setDuration((Duration.millis(1000)));
             translate.setByX(x);
@@ -394,9 +404,12 @@ public class DashboardController implements Initializable{
         master.getChildren().add(t);
         }
         master.play();
-        System.out.println("take-off");
+        System.out.println("scan farm");
     }
 
+    /*
+     * Function that implements "Visit item" functionality for the drone
+     */
     @FXML
     void onVisitItemButtonClick() {
         int x = Integer.parseInt(xCoordTextField.getText());
@@ -404,48 +417,37 @@ public class DashboardController implements Initializable{
         int w = Integer.parseInt(widthTextField.getText());
         int h = Integer.parseInt(heightTextField.getText());
 
-        //if the users input is more that the limit parametr (in our case for x it will be 600 and for y : 700)
-        //the drone will stop at the border
-
-        if (x > X_COORD_LIMIT_POSITIVE) {
-            x = X_COORD_LIMIT_POSITIVE;
-            xCoordTextField.setText(Integer.toString(x));
-        }
-        else if (x < X_COORD_LIMIT_NEGATIVE){
-            x = X_COORD_LIMIT_NEGATIVE;
-            xCoordTextField.setText(Integer.toString(x));
-        }
-            
-        if (y > Y_COORD_LIMIT_POSITIVE) {
-            y = Y_COORD_LIMIT_POSITIVE;
-            yCoordTextField.setText(Integer.toString(y));
-        }
-        else if (y < Y_COORD_LIMIT_NEGATIVE){
-            y = Y_COORD_LIMIT_NEGATIVE;
-            yCoordTextField.setText(Integer.toString(y));
-        }
         //translate
         droneIC.getImageView().toFront();
         TranslateTransition translate = new TranslateTransition();
         translate.setNode(droneIC.getImageView());
         translate.setDuration(Duration.millis(500));
+
         x = (int) x + w/2 - 30; //centering drone over the item
         y = (int) y + h/2 - 30; //centering drone over item
-        System.out.println("x coord: " + x);
-        System.out.println("y coord: " + y);
-        translate.setToX((0 - droneIC.getXcoordinate()) + x); //resetting x/y coords
-        translate.setToY((0 - droneIC.getYcoordinate()) + y);
+
+        int deltaX = x - droneIC.getXcoordinate();
+        int deltaY = y - droneIC.getYcoordinate();
+
+        translate.setByX(deltaX);
+        translate.setByY(deltaY);
         translate.play();
 
-        System.out.println("x coord: " + x);
-        System.out.println("y coord: " + y);
+        // update drone's coordinates
+        droneIC.setXcoordinate(x);
+        droneIC.setYcoordinate(y);
+
+        System.out.println("visited item");
+
     }
-
-
+    
+    /*
+     * Function that shows information about the item, when the item is selected in the directory view
+     */
     @FXML
     void selectItem(MouseEvent event) {
         
-        // Get currently selected directory TreeItem 
+    // Get currently selected directory TreeItem 
     TreeItem<ItemComponent> selectedTreeItem = treeView.getSelectionModel().getSelectedItem();
     // Get the Item corresponding to the current directory TreeItem and set it in the textFields
     nameTextField.setText(selectedTreeItem.getValue().getName());
