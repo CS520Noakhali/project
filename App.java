@@ -1,4 +1,3 @@
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -9,13 +8,15 @@ import javafx.stage.Stage;
  
 public class App extends Application  {
 
-    SingletonStage stage = SingletonStage.getInstance();
-
     @Override
     public void start(Stage stage) throws Exception {
 
-
-        Parent root = FXMLLoader.load(getClass().getResource("dashboard.fxml"));
+        // get the singleton instance of DashboardController class
+        DashboardController dashboardController = DashboardController.getInstance();
+        
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("dashboard.fxml"));
+        loader.setController(dashboardController);
+        Parent root = loader.load();
         Scene scene = new Scene(root);
         stage.setScene(scene);
         stage.show();

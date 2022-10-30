@@ -1,3 +1,5 @@
+import javafx.fxml.FXML;
+import javafx.scene.image.ImageView;
 
 // The component abstract class declares common variables and operations for both
 // composite (ItemContainer) and leaf (Item) classes.
@@ -11,8 +13,14 @@ abstract class ItemComponent {
     private int length;
     private int width;
     private int height;
+    
+    @FXML
+    private ImageView imageview;
+    
+    
+    
 
-    public ItemComponent(String name, int price, int x, int y, int length, int width, int height) {
+    public ItemComponent(String name, int price, int x, int y, int length, int width, int height, ImageView imageview) {
         this.name = name;
         this.price = price;
         this.xCoordinate = x;
@@ -20,6 +28,7 @@ abstract class ItemComponent {
         this.length = length;
         this.width = width;
         this.height = height;
+        this.imageview=imageview;
     }
 
     // ****************************
@@ -63,7 +72,7 @@ abstract class ItemComponent {
     }
 
     public void setWidth(int newWidth) {
-        this.length = newWidth;
+        this.width = newWidth;
     }
 
     public int getHeight() {
@@ -81,13 +90,31 @@ abstract class ItemComponent {
     public void setPrice(int newPrice) {
         this.price = newPrice;
     }
+    
+    
+    public ImageView getImageView() {
+    	return this.imageview;
+    }
 
+    public void setImageView(ImageView imageview) {
+    	this.imageview=imageview;
+    }
+    
+    
     @Override
     public String toString() {
         return this.name;
     }
 
 
+    // debug purpose
+    public void printinfo() {
+    	System.out.println("Name : "+ this.getName());
+    	System.out.println("X cord : "+ this.getXcoordinate() + " Y cord: " + this.getYcoordinate());
+    	System.out.println("Length : "+ this.getLength() + " Width: " + this.getWidth() + "height :" + this.getHeight());
+    	System.out.println("price : "+ this.getPrice());
+    	
+    }
     // ****************************
     //       abstract methods
     // ***************************

@@ -10,7 +10,7 @@
 <?import javafx.scene.shape.Circle?>
 <?import javafx.scene.text.Font?>
 
-<VBox fx:id="drone_field" alignment="CENTER" prefHeight="825.0" prefWidth="1151.0" spacing="20.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.drone.DroneController">
+<VBox fx:id="drone_field" alignment="CENTER" prefHeight="825.0" prefWidth="1151.0" spacing="20.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="drone_animation.DroneController">
     <padding>
         <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
     </padding>
@@ -44,4 +44,5 @@
             <Circle fx:id="droneImage" fill="DODGERBLUE" layoutX="24.0" layoutY="24.0" radius="10.0" stroke="BLACK" strokeType="INSIDE" />
          </children></Pane>
    </children>
+   
 </VBox>
