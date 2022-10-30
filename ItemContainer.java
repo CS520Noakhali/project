@@ -1,12 +1,15 @@
 import java.util.ArrayList;
 import java.util.List;
 
+import javafx.fxml.FXML;
+import javafx.scene.image.ImageView;
+
 // Composite class that represent Item Container
 public class ItemContainer extends ItemComponent {
 
     
-    public ItemContainer(String name, int price, int x, int y, int length, int width, int height) {
-	    super(name, price, x, y, length, width, height);
+    public ItemContainer(String name, int price, int x, int y, int length, int width, int height, ImageView imageview) {
+	    super(name, price, x, y, length, width, height, imageview);
     }
 
     // list to store children of Item Container
