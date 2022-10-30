@@ -6,34 +6,11 @@
     "configurations": [
         {
             "type": "java",
-            "name": "Launch DroneApplication",
-            "request": "launch",
-            "mainClass": "DroneApplication",
-            "projectName": "project_4995f30c",
-            "vmArgs": "--module-path \"/Users/debbiefu/Documents/javafx-sdk-18.0.2/lib\" --add-modules javafx.controls,javafx.fxml"
-        },
-        {
-            "type": "java",
-            "name": "Launch DroneApplication",
-            "request": "launch",
-            "mainClass": "drone_animation.DroneApplication",
-            "projectName": "project_4995f30c",
-            "vmArgs": "--module-path \"/Users/debbiefu/Documents/javafx-sdk-18.0.2/lib\" --add-modules javafx.controls,javafx.fxml"
-        },
-        {
-            "type": "java",
-            "name": "Launch Current File",
-            "request": "launch",
-            "mainClass": "${file}",
-            "vmArgs": "--module-path \"/Users/debbiefu/Documents/javafx-sdk-18.0.2/lib\" --add-modules javafx.controls,javafx.fxml"
-        },
-        {
-            "type": "java",
             "name": "Launch App",
             "request": "launch",
             "mainClass": "App",
-            "projectName": "project_4995f30c",
-            "vmArgs": "--module-path \"/Users/debbiefu/Documents/javafx-sdk-18.0.2/lib\" --add-modules javafx.controls,javafx.fxml"
-        }
+            "projectName": "project_27305640",
+            "vmArgs": "--module-path /home/mik/Fall2022/Softdev/javafx-sdk-19/lib --add-modules javafx.controls,javafx.fxml",
+        },
     ]
 }

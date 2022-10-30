@@ -74,7 +74,13 @@ public class DashboardController implements Initializable{
     @FXML
     private  TextField heightTextField;
 
-    int x_final_coord, y_final_coord = 0;
+    //GLOBAL VALUES
+    int X_FINAL_COORD, Y_FINAL_COORD = 0;
+    
+    int X_COORD_LIMIT_POSITIVE = 500;
+    int X_COORD_LIMIT_NEGATIVE = 0;
+    int Y_COORD_LIMIT_POSITIVE = 700;
+    int Y_COORD_LIMIT_NEGATIVE = 0;
 
 
     // Method that shows item information pane. Use item getter methods.
@@ -217,38 +223,67 @@ void onSaveItemInfoButtonClick(ActionEvent event) {
 
 void onReturnHomeButtonClick() {
     TranslateTransition translate = new TranslateTransition();
-        translate.setNode(droneImage);
-        translate.setDuration(Duration.millis(1));
-        translate.setByX(x_final_coord*(-1));
-        translate.setByY(y_final_coord*(-1));
+    X_FINAL_COORD = 0;
+    Y_FINAL_COORD = 0;
 
-        translate.play();
-        x_final_coord = 0;
-        y_final_coord = 0;
-
-        System.out.println("return to origin!");
+    translate.setNode(droneImage);
+    translate.setDuration(Duration.millis(500));
+    translate.setToX(X_FINAL_COORD);
+    translate.setToY(Y_FINAL_COORD);
+    
+    translate.play();
+    System.out.println("return to origin!");
 }
 
 @FXML
 void onScanFarmButtonClick() {
-    int[][] coordinates = {{0, 700}, {100, 0}, {0, -700}, {100, 0}, {0, 700}, {100, 0}, {0, -700}, {100, 0}, {0, 700}, {100, 0}, {0, -700}
+
+    X_FINAL_COORD = 0;
+    Y_FINAL_COORD = 0;
+
+    int[][] coordinates = {
+        {0, 700}, 
+        {100, 0},
+        {0, -700},
+        {100, 0},
+        {0, 700},
+        {100, 0},
+        {0, -700},
+        {100, 0},
+        {0, 700},
+        {100, 0},
+        {0, -700}
     };
 
     SequentialTransition master = new SequentialTransition();
 
     ArrayList<TranslateTransition> lst1 = new ArrayList<>();
+
+    TranslateTransition initiate = new TranslateTransition();
+    initiate.setNode(droneImage);
+    initiate.setDuration(Duration.millis(500));
+    initiate.setToX(0);
+    initiate.setToY(0);
+    lst1.add(initiate);
+
     for (int i = 0;i<coordinates.length;i++){
-    TranslateTransition translate = new TranslateTransition();
-    translate.setNode(droneImage);
-    int[] arr = coordinates[i];
-    int x = arr[0];
-    int y = arr[1];
-    translate.setDuration((Duration.millis(1000)));
-    translate.setByX(x);
-    translate.setByY(y);
-    x_final_coord += x;
-    y_final_coord += y;
-    lst1.add(translate);
+        TranslateTransition translate = new TranslateTransition();
+        
+        int[] arr = coordinates[i];
+        int x = arr[0];
+        int y = arr[1];
+        
+         
+
+        translate.setNode(droneImage);
+        translate.setDuration((Duration.millis(1000)));
+        translate.setByX(x);
+        translate.setByY(y);
+        
+        X_FINAL_COORD += x;
+        Y_FINAL_COORD += y;
+        
+        lst1.add(translate);
     }
 
     for (TranslateTransition t: lst1){
@@ -263,16 +298,36 @@ void onVisitItemButtonClick() {
     int x = Integer.parseInt(xCoordTextField.getText());
     int y = Integer.parseInt(yCoordTextField.getText());
 
+    //if the users input is more that the limit parametr (in our case for x it will be 600 and for y : 700)
+    //the drone will stop at the border
+
+    if (x > X_COORD_LIMIT_POSITIVE) {
+        x = X_COORD_LIMIT_POSITIVE;
+        xCoordTextField.setText(Integer.toString(x));
+    }
+    else if (x < X_COORD_LIMIT_NEGATIVE){
+        x = X_COORD_LIMIT_NEGATIVE;
+        xCoordTextField.setText(Integer.toString(x));
+    }
+        
+    if (y > Y_COORD_LIMIT_POSITIVE) {
+        y = Y_COORD_LIMIT_POSITIVE;
+        yCoordTextField.setText(Integer.toString(y));
+    }
+    else if (y < Y_COORD_LIMIT_NEGATIVE){
+        y = Y_COORD_LIMIT_NEGATIVE;
+        yCoordTextField.setText(Integer.toString(y));
+    }
     //translate
     TranslateTransition translate = new TranslateTransition();
     translate.setNode(droneImage);
     translate.setDuration(Duration.millis(500));
-    translate.setByX(x);
-    translate.setByY(y);
+    translate.setToX(x);
+    translate.setToY(y);
     translate.play();
 
-    x_final_coord += x;
-    y_final_coord += y;
+    X_FINAL_COORD = x;
+    Y_FINAL_COORD = y;
 
     System.out.println("x coord: " + x);
     System.out.println("y coord: " + y);
