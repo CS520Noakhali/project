@@ -220,12 +220,25 @@ ADD ITEM CONTAINER functionality
 @FXML
 void onAddItemContainerButtonClick(ActionEvent event) {
 	
-	ImageView dummy = null;
-
+	int price, x,y, length, width, height;
+	price=length =0;
+	x=y=100;
+	width=height=20;
+	
+	Image image=  new Image(getClass().getResourceAsStream("item_container.png")); 
+    ImageView containerview= new ImageView(image);
+	
         // a. First, create new ItemContainer and corresponding TreeItem
-        ItemComponent newItemContainer =  new ItemContainer("New Item Container", 0, 0, 0, 0, 0, 0, dummy);
+        ItemComponent newItemContainer =  new ItemContainer("New Item Container", price, x, y, length, width, height, containerview);
         TreeItem<ItemComponent> newTreeItemContainer = new TreeItem<>(newItemContainer);
     
+        // set node on pane   
+        newItemContainer.getImageView().setX(x);
+        newItemContainer.getImageView().setY(y);
+        newItemContainer.getImageView().setFitHeight(height);
+        newItemContainer.getImageView().setFitWidth(width);
+        farm_pane.getChildren().add(newItemContainer.getImageView());
+        
         // b. Next, we will update TreeView 
     
         // Get currently selected directory TreeItem
