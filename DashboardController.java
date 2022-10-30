@@ -222,19 +222,24 @@ public class DashboardController implements Initializable{
         // Get the Item corresponding to the current directory TreeItem
         ItemComponent selectedItem = selectedTreeItem.getValue();
 
-        // remove the image of the item from the farm pane
-        farm_pane.getChildren().remove(selectedItem.getImageView());
+        // if the selectedItem is neither the root, command center, nor drone...
+        if (!selectedItem.getName().equals("root") && !selectedItem.getName().equals("command center") && !selectedItem.getName().equals("drone")) {
 
-        // Get the parent of the selected TreeItem
-        TreeItem<ItemComponent> parentTreeItem = selectedTreeItem.getParent();
-        // Get the Item corresponding to the parent
-        ItemComponent parentItem = parentTreeItem.getValue();
+            // remove the image of the item from the farm pane
+            farm_pane.getChildren().remove(selectedItem.getImageView());
+    
+            // Get the parent of the selected TreeItem
+            TreeItem<ItemComponent> parentTreeItem = selectedTreeItem.getParent();
+            // Get the Item corresponding to the parent
+            ItemComponent parentItem = parentTreeItem.getValue();
+    
+            // Delete from TreeView structure
+            parentTreeItem.getChildren().remove(selectedTreeItem);
+            
+            // Delete item from our Composite pattern structure
+            parentItem.delete(selectedItem);
+        }
 
-        // Delete from TreeView structure
-        parentTreeItem.getChildren().remove(selectedTreeItem);
-        
-        // Delete item from our Composite pattern structure
-        parentItem.delete(selectedItem);
     }
 
     /*

@@ -1,13 +1,15 @@
 {
+    // "java.project.sourcePaths": ["src"],
+    // "java.project.outputPath": "bin",
     "java.project.referencedLibraries": [
         "lib/**/*.jar",
-        "/home/mik/Fall2022/Softdev/javafx-sdk-19/lib/javafx.base.jar",
-        "/home/mik/Fall2022/Softdev/javafx-sdk-19/lib/javafx.controls.jar",
-        "/home/mik/Fall2022/Softdev/javafx-sdk-19/lib/javafx.fxml.jar",
-        "/home/mik/Fall2022/Softdev/javafx-sdk-19/lib/javafx.graphics.jar",
-        "/home/mik/Fall2022/Softdev/javafx-sdk-19/lib/javafx.media.jar",
-        "/home/mik/Fall2022/Softdev/javafx-sdk-19/lib/javafx.swing.jar",
-        "/home/mik/Fall2022/Softdev/javafx-sdk-19/lib/javafx.web.jar",
-        "/home/mik/Fall2022/Softdev/javafx-sdk-19/lib/javafx-swt.jar"
+        "c:\\Users\\IanToy\\Java\\javafx-sdk-19\\lib\\javafx.base.jar",
+        "c:\\Users\\IanToy\\Java\\javafx-sdk-19\\lib\\javafx.controls.jar",
+        "c:\\Users\\IanToy\\Java\\javafx-sdk-19\\lib\\javafx.fxml.jar",
+        "c:\\Users\\IanToy\\Java\\javafx-sdk-19\\lib\\javafx.graphics.jar",
+        "c:\\Users\\IanToy\\Java\\javafx-sdk-19\\lib\\javafx.media.jar",
+        "c:\\Users\\IanToy\\Java\\javafx-sdk-19\\lib\\javafx.swing.jar",
+        "c:\\Users\\IanToy\\Java\\javafx-sdk-19\\lib\\javafx.web.jar",
+        "c:\\Users\\IanToy\\Java\\javafx-sdk-19\\lib\\javafx-swt.jar"
     ]
 }

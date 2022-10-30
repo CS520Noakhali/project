@@ -9,8 +9,14 @@
             "name": "Launch App",
             "request": "launch",
             "mainClass": "App",
-            "projectName": "project_27305640",
-            "vmArgs": "--module-path /home/mik/Fall2022/Softdev/javafx-sdk-19/lib --add-modules javafx.controls,javafx.fxml",
+            "projectName": "project_b20133b6",
+            "vmArgs": "--module-path \"C:/Users/IanToy/Java/javafx-sdk-19/lib\" --add-modules javafx.controls,javafx.fxml"
         },
+        {
+            "type": "java",
+            "name": "Launch Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        }
     ]
 }
