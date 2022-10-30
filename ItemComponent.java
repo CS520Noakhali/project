@@ -17,8 +17,6 @@ abstract class ItemComponent {
     @FXML
     private ImageView imageview;
     
-    
-    
 
     public ItemComponent(String name, int price, int x, int y, int length, int width, int height, ImageView imageview) {
         this.name = name;
@@ -91,7 +89,6 @@ abstract class ItemComponent {
         this.price = newPrice;
     }
     
-    
     public ImageView getImageView() {
     	return this.imageview;
     }
@@ -115,38 +112,14 @@ abstract class ItemComponent {
     	System.out.println("price : "+ this.getPrice());
     	
     }
+
     // ****************************
     //       abstract methods
     // ***************************
 
     
-    
     abstract void add(ItemComponent itemComponent);
         
     abstract void delete(ItemComponent itemComponent);
-
-
-
-
-
-
-
     
-
-
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
 }
