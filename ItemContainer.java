@@ -1,7 +1,5 @@
 import java.util.ArrayList;
 import java.util.List;
-
-import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 
 // Composite class that represent Item Container
@@ -27,17 +25,6 @@ public class ItemContainer extends ItemComponent {
     @Override
     public void delete(ItemComponent itemComponent) {
         itemComponentList.remove(itemComponent);
-}
+    }
 
-    
-
-
-
-
-
-
-
-
-
-    
 }

@@ -1,4 +1,3 @@
-import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 
 // Leaf class that represent Item 
@@ -21,6 +20,4 @@ public class Item extends ItemComponent {
     }
 
     
-    
-
 }
