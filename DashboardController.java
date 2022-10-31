@@ -126,45 +126,48 @@ public class DashboardController implements Initializable{
     ADD ITEM functionality 
     */
     @FXML
-    void onAddItemButtonClick(ActionEvent event) {	
-        int price, x,y, length, width, height;
-        price=length =0;
-        x=y=100;
-        width=height=20;
-        
-        Image image=  new Image(getClass().getResourceAsStream("testitem.png")); 
-        ImageView testview1= new ImageView(image);
-        
-        // a. First, create new Item and corresponding TreeItem
-        ItemComponent newItem =  new Item("New item", price, x, y, length, width, height,testview1);
-        TreeItem<ItemComponent> newTreeItem = new TreeItem<>(newItem);
-        
-        // set node on pane   
-        newItem.getImageView().setX(x);
-        newItem.getImageView().setY(y);
-        newItem.getImageView().setFitHeight(height);
-        newItem.getImageView().setFitWidth(width);
-        farm_pane.getChildren().add(newItem.getImageView());
-        
-        
-        //Sanity check (pass)
-        newItem.printinfo();
-
-        // b. Next, we will update TreeView 
-
-        // Get currently selected directory TreeItem
+    void onAddItemButtonClick(ActionEvent event) {
+        // Get currently selected directory TreeItem 
         TreeItem<ItemComponent> selectedTreeItem = treeView.getSelectionModel().getSelectedItem();
-        // Add new item to the selected TreeItem
-        selectedTreeItem.getChildren().add(newTreeItem);
-        newTreeItem.setExpanded(true);
-        treeView.getSelectionModel().select(newTreeItem);
+        // Get the Item corresponding to the current directory TreeItem
+        ItemComponent selectedItem = selectedTreeItem.getValue();
 
-        // c. Then, we will update our Composite pattern structure
-
-        // Get the Item Container corresponding to the current directory TreeItem
-        ItemContainer selectedItemContainer = (ItemContainer)selectedTreeItem.getValue();
-        // Add item to the item container
-        selectedItemContainer.add(newItem);
+        if (selectedItem instanceof ItemContainer) {
+            int price, x,y, length, width, height;
+            price=length =0;
+            x=y=100;
+            width=height=20;
+            
+            Image image=  new Image(getClass().getResourceAsStream("testitem.png")); 
+            ImageView testview1= new ImageView(image);
+            
+            // a. First, create new Item and corresponding TreeItem
+            ItemComponent newItem =  new Item("New item", price, x, y, length, width, height,testview1);
+            TreeItem<ItemComponent> newTreeItem = new TreeItem<>(newItem);
+            
+            // set node on pane   
+            newItem.getImageView().setX(x);
+            newItem.getImageView().setY(y);
+            newItem.getImageView().setFitHeight(height);
+            newItem.getImageView().setFitWidth(width);
+            farm_pane.getChildren().add(newItem.getImageView());
+            
+            
+            //Sanity check (pass)
+            newItem.printinfo();
+    
+            // b. Next, we will update TreeView 
+            // Add new item to the selected TreeItem
+            selectedTreeItem.getChildren().add(newTreeItem);
+            newTreeItem.setExpanded(true);
+            treeView.getSelectionModel().select(newTreeItem);
+    
+            // c. Then, we will update our Composite pattern structure
+            // Get the Item Container corresponding to the current directory TreeItem
+            ItemContainer selectedItemContainer = (ItemContainer)selectedTreeItem.getValue();
+            // Add item to the item container
+            selectedItemContainer.add(newItem);
+        }
     }
 
     /* 
@@ -172,42 +175,48 @@ public class DashboardController implements Initializable{
     */
     @FXML
     void onAddItemContainerButtonClick(ActionEvent event) {
-        
-        int price, x,y, length, width, height;
-        price = length = 0;
-        x = y = 100;
-        width = height = 20;
-        
-        // Image for the item container
-        Image image = new Image(getClass().getResourceAsStream("item_container.png")); 
-        ImageView containerview= new ImageView(image);
-        containerview.toBack();
-
-        // a. Create new ItemContainer and corresponding TreeItem
-        ItemComponent newItemContainer =  new ItemContainer("New Item Container", price, x, y, length, width, height, containerview);
-        TreeItem<ItemComponent> newTreeItemContainer = new TreeItem<>(newItemContainer);
-        
-        // b. set the image on the farm pane  
-        newItemContainer.getImageView().setX(x);
-        newItemContainer.getImageView().setY(y);
-        newItemContainer.getImageView().setFitHeight(height);
-        newItemContainer.getImageView().setFitWidth(width);
-        farm_pane.getChildren().add(newItemContainer.getImageView());
-
-
-        // c. update TreeView 
-            // Get currently selected directory TreeItem
+        // Get currently selected directory TreeItem 
         TreeItem<ItemComponent> selectedTreeItem = treeView.getSelectionModel().getSelectedItem();
-            // Add new item to the selected TreeItem
-        selectedTreeItem.getChildren().add(newTreeItemContainer);
-        newTreeItemContainer.setExpanded(true);
-        treeView.getSelectionModel().select(newTreeItemContainer);
+        // Get the Item corresponding to the current directory TreeItem
+        ItemComponent selectedItem = selectedTreeItem.getValue();
 
-        // d. Update our Composite pattern structure
+        if (selectedItem instanceof ItemContainer) {
+            int price, x,y, length, width, height;
+            price = length = 0;
+            x = y = 100;
+            width = height = 20;
+            
+            // Image for the item container
+            Image image = new Image(getClass().getResourceAsStream("item_container.png")); 
+            ImageView containerview= new ImageView(image);
+            containerview.toBack();
+    
+            // a. Create new ItemContainer and corresponding TreeItem
+            ItemComponent newItemContainer =  new ItemContainer("New Item Container", price, x, y, length, width, height, containerview);
+            TreeItem<ItemComponent> newTreeItemContainer = new TreeItem<>(newItemContainer);
+            
+            // b. set the image on the farm pane  
+            newItemContainer.getImageView().setX(x);
+            newItemContainer.getImageView().setY(y);
+            newItemContainer.getImageView().setFitHeight(height);
+            newItemContainer.getImageView().setFitWidth(width);
+            farm_pane.getChildren().add(newItemContainer.getImageView());
+    
+    
+            // c. update TreeView 
+            // Add new item to the selected TreeItem
+            selectedTreeItem.getChildren().add(newTreeItemContainer);
+            newTreeItemContainer.setExpanded(true);
+            treeView.getSelectionModel().select(newTreeItemContainer);
+    
+            // d. Update our Composite pattern structure
             // Get the Item Container corresponding to the current directory TreeItem
-        ItemContainer selectedItemContainer = (ItemContainer)selectedTreeItem.getValue();
+            ItemContainer selectedItemContainer = (ItemContainer)selectedTreeItem.getValue();
             // Add item to the item container
-        selectedItemContainer.add(newItemContainer);
+            selectedItemContainer.add(newItemContainer);
+
+        }
+
 
     }
 
@@ -222,19 +231,23 @@ public class DashboardController implements Initializable{
         // Get the Item corresponding to the current directory TreeItem
         ItemComponent selectedItem = selectedTreeItem.getValue();
 
-        // remove the image of the item from the farm pane
-        farm_pane.getChildren().remove(selectedItem.getImageView());
+        // if the selectedItem is neither the root, command center, nor drone...
+        if (!selectedItem.getName().equals("root") && !selectedItem.getName().equals("command center") && !selectedItem.getName().equals("drone")) {
 
-        // Get the parent of the selected TreeItem
-        TreeItem<ItemComponent> parentTreeItem = selectedTreeItem.getParent();
-        // Get the Item corresponding to the parent
-        ItemComponent parentItem = parentTreeItem.getValue();
-
-        // Delete from TreeView structure
-        parentTreeItem.getChildren().remove(selectedTreeItem);
-        
-        // Delete item from our Composite pattern structure
-        parentItem.delete(selectedItem);
+            // remove the image of the item from the farm pane
+            farm_pane.getChildren().remove(selectedItem.getImageView());
+    
+            // Get the parent of the selected TreeItem
+            TreeItem<ItemComponent> parentTreeItem = selectedTreeItem.getParent();
+            // Get the Item corresponding to the parent
+            ItemComponent parentItem = parentTreeItem.getValue();
+    
+            // Delete from TreeView structure
+            parentTreeItem.getChildren().remove(selectedTreeItem);
+            
+            // Delete item from our Composite pattern structure
+            parentItem.delete(selectedItem);
+        }
     }
 
     /*
@@ -378,8 +391,10 @@ public class DashboardController implements Initializable{
         TranslateTransition initiate = new TranslateTransition();
         initiate.setNode(droneIC.getImageView());
         initiate.setDuration(Duration.millis(900));
-        initiate.setToX(20-droneIC.getXcoordinate()); //centering drone to top left
-        initiate.setToY(30-droneIC.getYcoordinate()); 
+
+        initiate.setByX(20-droneIC.getXcoordinate()); //centering drone to top left
+        initiate.setByY(30-droneIC.getYcoordinate()); 
+
         lst1.add(initiate);
 
         for (int i = 0;i<coordinates.length;i++){
@@ -405,6 +420,11 @@ public class DashboardController implements Initializable{
         }
         master.play();
         System.out.println("scan farm");
+
+        // update drone's coordinates
+        droneIC.setXcoordinate(520);
+        droneIC.setYcoordinate(30);
+
     }
 
     /*
