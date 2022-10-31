@@ -391,8 +391,8 @@ public class DashboardController implements Initializable{
         TranslateTransition initiate = new TranslateTransition();
         initiate.setNode(droneIC.getImageView());
         initiate.setDuration(Duration.millis(900));
-        initiate.setToX(20-droneIC.getXcoordinate()); //centering drone to top left
-        initiate.setToY(30-droneIC.getYcoordinate()); 
+        initiate.setByX(20-droneIC.getXcoordinate()); //centering drone to top left
+        initiate.setByY(30-droneIC.getYcoordinate()); 
         lst1.add(initiate);
 
         for (int i = 0;i<coordinates.length;i++){
@@ -418,6 +418,10 @@ public class DashboardController implements Initializable{
         }
         master.play();
         System.out.println("scan farm");
+
+        // update drone's coordinates
+        droneIC.setXcoordinate(520);
+        droneIC.setYcoordinate(30);
     }
 
     /*
