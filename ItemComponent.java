@@ -131,5 +131,7 @@ abstract class ItemComponent {
     abstract void add(ItemComponent itemComponent);
         
     abstract void delete(ItemComponent itemComponent);
+
+    abstract int accept(AbstractVisitor visitor);
     
 }

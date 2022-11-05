@@ -27,4 +27,11 @@ public class ItemContainer extends ItemComponent {
         itemComponentList.remove(itemComponent);
     }
 
+
+    // Accept Visitor method
+    @Override
+    int accept(AbstractVisitor visitor) {
+        return visitor.visit(this);
+    }
+
 }
