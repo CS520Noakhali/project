@@ -6,8 +6,8 @@ import javafx.scene.image.ImageView;
 public class ItemContainer extends ItemComponent {
 
     
-    public ItemContainer(String name, int price, int x, int y, int length, int width, int height, ImageView imageview) {
-	    super(name, price, x, y, length, width, height, imageview);
+    public ItemContainer(String name, int price, int x, int y, int length, int width, int height, int marketValue, ImageView imageview) {
+	    super(name, price, x, y, length, width, height, marketValue, imageview);
     }
 
     // list to store children of Item Container
