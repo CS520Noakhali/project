@@ -11,7 +11,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="838.0" prefWidth="915.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="838.0" prefWidth="915.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <SplitPane dividerPositions="0.04" orientation="VERTICAL" prefHeight="830.0" prefWidth="1200.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
         <items>
@@ -52,7 +52,7 @@
                                                 </AnchorPane>
                                               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                                                    <children>
-                                                      <SplitPane dividerPositions="0.6414881623449832" layoutX="44.0" layoutY="190.0" orientation="VERTICAL" prefHeight="553.0" prefWidth="301.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                                      <SplitPane dividerPositions="0.5670800450958287" layoutX="44.0" layoutY="190.0" orientation="VERTICAL" prefHeight="553.0" prefWidth="301.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                         <items>
                                                           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
                                                                <children>
@@ -87,9 +87,7 @@
                                                                                     <HBox maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="300.0">
                                                                                        <children>
                                                                                           <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="51.0" text="  Name:" />
-                                                                                          <TextField fx:id="nameTextField" prefHeight="30.0" prefWidth="150.0" />
-                                                                                          <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="40.0" text="  Price:" />
-                                                                                          <TextField fx:id="priceTextField" prefHeight="30.0" prefWidth="50.0" />
+                                                                                          <TextField fx:id="nameTextField" prefHeight="30.0" prefWidth="245.0" />
                                                                                        </children>
                                                                                     </HBox>
                                                                                     <HBox maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="300.0">
@@ -114,6 +112,15 @@
                                                                                     <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="22.0" text=" , Y:" />
                                                                                     <TextField fx:id="yCoordTextField" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="75.0" />
                                                                                     <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="26.0" text=" )" />
+                                                                                 </children>
+                                                                              </HBox>
+                                                                              <HBox maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="10.0" prefWidth="300.0" />
+                                                                              <HBox prefHeight="35.0" prefWidth="286.0">
+                                                                                 <children>
+                                                                                    <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="87.0" text="  Purchase Price:" />
+                                                                                    <TextField fx:id="priceTextField" prefHeight="30.0" prefWidth="70.0" />
+                                                                                    <Label maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="30.0" prefWidth="75.0" text=" Market Price:" />
+                                                                                    <TextField fx:id="marketPriceTextField" prefHeight="30.0" prefWidth="70.0" />
                                                                                  </children>
                                                                               </HBox>
                                                                            </children>
