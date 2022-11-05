@@ -69,6 +69,15 @@ public class DashboardController implements Initializable{
     @FXML
     private Pane farm_pane;
 
+    // shows market value calculated with Visitor
+    @FXML
+    private TextField calculatedMarketValueField;
+
+    // shows purchase price calculated with Visitor
+    @FXML
+    private TextField calculatedPurchasePriceField;
+
+
     //GLOBAL VALUES
     int X_FINAL_COORD, Y_FINAL_COORD = 0;
     int X_COORD_LIMIT_POSITIVE = 500;
@@ -490,6 +499,51 @@ public class DashboardController implements Initializable{
     heightTextField.setText(Integer.toString(selectedTreeItem.getValue().getHeight()));
     marketPriceTextField.setText(Integer.toString(selectedTreeItem.getValue().getMarketValue()));
     
+    }
+
+    /*
+     * Function that calculates the Market Value of the selected item/item container
+     */
+    @FXML
+    void onCalculateMarketValueClick(ActionEvent event) {
+
+        // create  MarketValueVisitor object
+        AbstractVisitor visitor = new MarketValueVisitor();
+
+        // get selected item component
+        ItemComponent selectedIC = treeView.getSelectionModel().getSelectedItem().getValue();
+
+        // Accept visitor
+        int marketValue = selectedIC.accept(visitor);
+
+        try {
+            calculatedMarketValueField.setText(Integer.toString(marketValue));         
+        } catch (Exception e) {
+            System.out.println("Calculated Market Value Text Field error");
+        }
+        
+    }
+
+    /*
+     * Function that calculates the Purchase price of the selected item/item container
+     */
+    @FXML
+    void onCalculatePurchasePriceClick(ActionEvent event) {
+
+        // create PurchasePriceVisitor object
+        AbstractVisitor visitor = new PurchasePriceVisitor();
+
+        // get selected item component
+        ItemComponent selectedIC = treeView.getSelectionModel().getSelectedItem().getValue();
+
+        int purchasePrice = selectedIC.accept(visitor);
+
+        try {
+            calculatedPurchasePriceField.setText(Integer.toString(purchasePrice));          
+        } catch (Exception e) {
+            System.out.println("Calculated Purchase Price Text Field error");
+        }
+        
     }
 
 }
