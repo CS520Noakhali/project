@@ -52,6 +52,9 @@ public class DashboardController implements Initializable{
     private TextField priceTextField;
 
     @FXML
+    private TextField marketPriceTextField;
+
+    @FXML
     private TextField widthTextField;
 
     @FXML
@@ -66,6 +69,15 @@ public class DashboardController implements Initializable{
     @FXML
     private Pane farm_pane;
 
+    // shows market value calculated with Visitor
+    @FXML
+    private TextField calculatedMarketValueField;
+
+    // shows purchase price calculated with Visitor
+    @FXML
+    private TextField calculatedPurchasePriceField;
+
+
     //GLOBAL VALUES
     int X_FINAL_COORD, Y_FINAL_COORD = 0;
     int X_COORD_LIMIT_POSITIVE = 500;
@@ -79,9 +91,9 @@ public class DashboardController implements Initializable{
     ImageView drone_view= new ImageView(droneimage);
     Image com_centre_image = new Image(getClass().getResourceAsStream("comm_center.png"));
     ImageView com_centre_view= new ImageView(com_centre_image);
-    ItemComponent rootIC = new ItemContainer("root", 0, 0, 0, 0, 0, 0, dummy);
-    ItemComponent commCenterIC = new ItemContainer("command center", 0, 400, 400, 0, 60,60, com_centre_view);
-    ItemComponent droneIC = new Drone("drone", 0, 400, 400, 0,  60, 60,drone_view);
+    ItemComponent rootIC = new ItemContainer("root", 0, 0, 0, 0, 0, 0, 0, dummy);
+    ItemComponent commCenterIC = new ItemContainer("command center", 30, 400, 400, 0, 60,60, 0, com_centre_view);
+    ItemComponent droneIC = new Drone("drone", 1000, 400, 400, 0, 60, 60, 2000, drone_view);
 
 
     /* 
@@ -133,8 +145,9 @@ public class DashboardController implements Initializable{
         ItemComponent selectedItem = selectedTreeItem.getValue();
 
         if (selectedItem instanceof ItemContainer) {
-            int price, x,y, length, width, height;
-            price=length =0;
+            int price, x,y, length, marketValue, width, height;
+            length = 0;
+            price = marketValue = 20;
             x=y=100;
             width=height=20;
             
@@ -142,7 +155,7 @@ public class DashboardController implements Initializable{
             ImageView testview1= new ImageView(image);
             
             // a. First, create new Item and corresponding TreeItem
-            ItemComponent newItem =  new Item("New item", price, x, y, length, width, height,testview1);
+            ItemComponent newItem =  new Item("New item", price, x, y, length, width, height, marketValue, testview1);
             TreeItem<ItemComponent> newTreeItem = new TreeItem<>(newItem);
             
             // set node on pane   
@@ -181,10 +194,11 @@ public class DashboardController implements Initializable{
         ItemComponent selectedItem = selectedTreeItem.getValue();
 
         if (selectedItem instanceof ItemContainer) {
-            int price, x,y, length, width, height;
-            price = length = 0;
+            int price, x,y, marketValue, length, width, height;
+            price = 300;
+            length = marketValue = 0;
             x = y = 100;
-            width = height = 20;
+            width = height = 100;
             
             // Image for the item container
             Image image = new Image(getClass().getResourceAsStream("item_container.png")); 
@@ -192,7 +206,7 @@ public class DashboardController implements Initializable{
             containerview.toBack();
     
             // a. Create new ItemContainer and corresponding TreeItem
-            ItemComponent newItemContainer =  new ItemContainer("New Item Container", price, x, y, length, width, height, containerview);
+            ItemComponent newItemContainer =  new ItemContainer("New Item Container", price, x, y, length, width, height, marketValue, containerview);
             TreeItem<ItemComponent> newTreeItemContainer = new TreeItem<>(newItemContainer);
             
             // b. set the image on the farm pane  
@@ -257,13 +271,13 @@ public class DashboardController implements Initializable{
     void onSaveItemInfoButtonClick(ActionEvent event) {
         
         String name = null; 
-        int price, x,y, length, width, height;
-        price =x=y=length=width=height=0;
+        int price, marketValue, x,y, length, width, height;
+        price=marketValue=x=y=length=width=height=0;
         
         try {
             name= nameTextField.getText();
         } catch (Exception e) {
-            System.out.println("name filed error");
+            System.out.println("name field error");
         }
         
         try {
@@ -271,38 +285,46 @@ public class DashboardController implements Initializable{
             price=Integer.parseInt(priceTextField.getText());
             
         }catch (Exception e) {
-            System.out.println("price filed error");
+            System.out.println("price field error");
+        }
+
+        try {
+            
+            marketValue=Integer.parseInt(marketPriceTextField.getText());
+            
+        }catch (Exception e) {
+            System.out.println("market value field error");
         }
         
         try {
             x=Integer.parseInt(xCoordTextField.getText());
         }catch (Exception e) {
-            System.out.println("x coordinate filed error");
+            System.out.println("x coordinate field error");
         }
         
         try {
             y=Integer.parseInt(yCoordTextField.getText());
         }catch (Exception e) {
-            System.out.println("y coordinate filed error");
+            System.out.println("y coordinate field error");
         }
         
         try {
             length=Integer.parseInt(lengthTextField.getText());
         } catch (Exception e) {
-            System.out.println("length filed error");
+            System.out.println("length field error");
         }
         
         try {
             width=Integer.parseInt(widthTextField.getText());
         }catch (Exception e) {
-            System.out.println("width filed error");
+            System.out.println("width field error");
         }
         
         try {
             height=Integer.parseInt(heightTextField.getText());
         }
         catch (Exception e) {
-            System.out.println("height filed error");
+            System.out.println("height field error");
         }
         
         // set variables to the Item Component using setters methods
@@ -314,6 +336,7 @@ public class DashboardController implements Initializable{
         selectedTreeItem.getValue().setXcoordinate(x);
         selectedTreeItem.getValue().setYcoordinate(y);
         selectedTreeItem.getValue().setPrice(price);
+        selectedTreeItem.getValue().setMarketValue(marketValue);
         
         // adjust position on pane
         selectedTreeItem.getValue().getImageView().setX(selectedTreeItem.getValue().getXcoordinate());
@@ -474,7 +497,53 @@ public class DashboardController implements Initializable{
     xCoordTextField.setText(Integer.toString(selectedTreeItem.getValue().getXcoordinate()));
     yCoordTextField.setText(Integer.toString(selectedTreeItem.getValue().getYcoordinate()));
     heightTextField.setText(Integer.toString(selectedTreeItem.getValue().getHeight()));
+    marketPriceTextField.setText(Integer.toString(selectedTreeItem.getValue().getMarketValue()));
     
+    }
+
+    /*
+     * Function that calculates the Market Value of the selected item/item container
+     */
+    @FXML
+    void onCalculateMarketValueClick(ActionEvent event) {
+
+        // create  MarketValueVisitor object
+        AbstractVisitor visitor = new MarketValueVisitor();
+
+        // get selected item component
+        ItemComponent selectedIC = treeView.getSelectionModel().getSelectedItem().getValue();
+
+        // Accept visitor
+        int marketValue = selectedIC.accept(visitor);
+
+        try {
+            calculatedMarketValueField.setText(Integer.toString(marketValue));         
+        } catch (Exception e) {
+            System.out.println("Calculated Market Value Text Field error");
+        }
+        
+    }
+
+    /*
+     * Function that calculates the Purchase price of the selected item/item container
+     */
+    @FXML
+    void onCalculatePurchasePriceClick(ActionEvent event) {
+
+        // create PurchasePriceVisitor object
+        AbstractVisitor visitor = new PurchasePriceVisitor();
+
+        // get selected item component
+        ItemComponent selectedIC = treeView.getSelectionModel().getSelectedItem().getValue();
+
+        int purchasePrice = selectedIC.accept(visitor);
+
+        try {
+            calculatedPurchasePriceField.setText(Integer.toString(purchasePrice));          
+        } catch (Exception e) {
+            System.out.println("Calculated Purchase Price Text Field error");
+        }
+        
     }
 
 }
