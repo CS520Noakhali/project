@@ -1,3 +1,4 @@
+import java.util.List;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 
@@ -131,7 +132,7 @@ abstract class ItemComponent {
     abstract void add(ItemComponent itemComponent);
         
     abstract void delete(ItemComponent itemComponent);
-
+    
     abstract int accept(AbstractVisitor visitor);
     
 }

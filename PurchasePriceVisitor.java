@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class PurchasePriceVisitor extends AbstractVisitor {
 
     /*
@@ -15,8 +17,7 @@ public class PurchasePriceVisitor extends AbstractVisitor {
     */ 
     @Override
     int visit(ItemContainer itemContainer) {
-        // TODO Auto-generated method stub
-        return 0;
+        return itemContainer.getPurchasePrice();
     }
 
     
