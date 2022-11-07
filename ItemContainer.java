@@ -34,12 +34,14 @@ public class ItemContainer extends ItemComponent {
         return purchasePrice;
     }
 
-
+    public List<ItemComponent> getChildren() {
+        return itemComponentList;
+    }
 
     // Accept Visitor method
     @Override
     int accept(AbstractVisitor visitor) {
-        return visitor.visit(this);
+        return visitor.visitItemContainer(this);
     }
 
 

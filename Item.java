@@ -1,5 +1,3 @@
-import java.util.List;
-
 import javafx.scene.image.ImageView;
 
 // Leaf class that represent Item 
@@ -24,7 +22,7 @@ public class Item extends ItemComponent {
     // Accept Visitor method
     @Override
     int accept(AbstractVisitor visitor) {
-        return visitor.visit(this);
+        return visitor.visitItem(this);
     }
 
     
