@@ -19,19 +19,32 @@ public class ItemContainer extends ItemComponent {
         itemComponentList.add(itemComponent);
     }
 
-
-
     // Delete all content of the item Container
     @Override
     public void delete(ItemComponent itemComponent) {
         itemComponentList.remove(itemComponent);
     }
 
+    // Calculates Purchase Price of the Item Container as its price plus prices of its children
+    public int getPurchasePrice() {
+        int purchasePrice = this.getPrice();
+        for (ItemComponent ic : itemComponentList) {
+            purchasePrice += ic.getPrice();
+        }
+        return purchasePrice;
+    }
+
+    public List<ItemComponent> getChildren() {
+        return itemComponentList;
+    }
 
     // Accept Visitor method
     @Override
     int accept(AbstractVisitor visitor) {
-        return visitor.visit(this);
+        return visitor.visitItemContainer(this);
     }
+
+
+
 
 }

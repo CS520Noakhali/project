@@ -5,7 +5,7 @@ public class MarketValueVisitor extends AbstractVisitor {
     Implementation of the visit method for the Item. Just returns the marketValue of the selected item
     */   
     @Override
-    int visit(Item item) {
+    int visitItem(Item item) {
         return item.getMarketValue();
     }
 
@@ -15,9 +15,13 @@ public class MarketValueVisitor extends AbstractVisitor {
     That means that item containers themselves have market value of 0. Count only items.
     */ 
     @Override
-    int visit(ItemContainer itemContainer) {
-        // TODO Auto-generated method stub
-        return 0;
+    int visitItemContainer(ItemContainer itemContainer) {
+        int marketValue = 0;
+        for (ItemComponent ic : itemContainer.getChildren()) {
+            if (ic instanceof Item) marketValue += ic.getMarketValue();
+            else marketValue += ic.accept(this);
+        }
+        return marketValue;
     }
 
 

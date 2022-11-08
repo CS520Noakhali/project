@@ -4,7 +4,7 @@ public class PurchasePriceVisitor extends AbstractVisitor {
     Implementation of the visit method for the Item. Just returns the price of the selected item
     */
     @Override
-    int visit(Item item) {
+    int visitItem(Item item) {
         return item.getPrice();
     }
 
@@ -14,9 +14,12 @@ public class PurchasePriceVisitor extends AbstractVisitor {
     (Note that item-containers can include other item-containers with their children)
     */ 
     @Override
-    int visit(ItemContainer itemContainer) {
-        // TODO Auto-generated method stub
-        return 0;
+    int visitItemContainer(ItemContainer itemContainer) {
+        int purchasePrice = itemContainer.getPrice();
+        for (ItemComponent ic : itemContainer.getChildren()) {
+            purchasePrice += ic.accept(this);
+        }
+        return purchasePrice;
     }
 
     

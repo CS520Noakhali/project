@@ -92,8 +92,8 @@ public class DashboardController implements Initializable{
     Image com_centre_image = new Image(getClass().getResourceAsStream("comm_center.png"));
     ImageView com_centre_view= new ImageView(com_centre_image);
     ItemComponent rootIC = new ItemContainer("root", 0, 0, 0, 0, 0, 0, 0, dummy);
-    ItemComponent commCenterIC = new ItemContainer("command center", 30, 400, 400, 0, 60,60, 0, com_centre_view);
-    ItemComponent droneIC = new Drone("drone", 1000, 400, 400, 0, 60, 60, 2000, drone_view);
+    ItemComponent commCenterIC = new ItemContainer("command center", 100, 400, 400, 0, 60,60, 0, com_centre_view);
+    ItemComponent droneIC = new Drone("drone", 10, 400, 400, 0, 60, 60, 10, drone_view);
 
 
     /* 
@@ -147,7 +147,7 @@ public class DashboardController implements Initializable{
         if (selectedItem instanceof ItemContainer) {
             int price, x,y, length, marketValue, width, height;
             length = 0;
-            price = marketValue = 20;
+            price = marketValue = 10;
             x=y=100;
             width=height=20;
             
@@ -195,7 +195,7 @@ public class DashboardController implements Initializable{
 
         if (selectedItem instanceof ItemContainer) {
             int price, x,y, marketValue, length, width, height;
-            price = 300;
+            price = 100;
             length = marketValue = 0;
             x = y = 100;
             width = height = 100;

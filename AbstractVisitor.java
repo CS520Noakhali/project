@@ -4,9 +4,9 @@
 
 abstract class AbstractVisitor {
 
-    abstract int visit(Item item);
+    abstract int visitItem(Item item);
 
-    abstract int visit(ItemContainer itemContainer);
+    abstract int visitItemContainer(ItemContainer itemContainer);
 
 
 }
