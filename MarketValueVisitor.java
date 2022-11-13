@@ -1,3 +1,7 @@
+/*
+ * Concrete Visitor that calculates total Market Value
+ */
+
 public class MarketValueVisitor extends AbstractVisitor {
 
 
@@ -18,13 +22,11 @@ public class MarketValueVisitor extends AbstractVisitor {
     int visitItemContainer(ItemContainer itemContainer) {
         int marketValue = 0;
         for (ItemComponent ic : itemContainer.getChildren()) {
-            if (ic instanceof Item) marketValue += ic.getMarketValue();
-            else marketValue += ic.accept(this);
-        }
+            if (ic instanceof Item) {
+                marketValue += ic.getMarketValue();
+            } else marketValue += ic.accept(this);
+        }   
         return marketValue;
     }
-
-
-
 
 }

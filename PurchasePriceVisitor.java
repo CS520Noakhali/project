@@ -1,3 +1,7 @@
+/*
+ * Concrete Visitor that calculates total Purchase Price
+ */
+
 public class PurchasePriceVisitor extends AbstractVisitor {
 
     /*
