@@ -4,10 +4,9 @@ import javafx.scene.image.ImageView;
 
 // Composite class that represent Item Container
 public class ItemContainer extends ItemComponent {
-
     
-    public ItemContainer(String name, int price, int x, int y, int length, int width, int height, int marketValue, ImageView imageview) {
-	    super(name, price, x, y, length, width, height, marketValue, imageview);
+    public ItemContainer(String name, int price, int x, int y, int length, int width, int height, ImageView imageview) {
+	    super(name, price, x, y, length, width, height, imageview);
     }
 
     // list to store children of Item Container
@@ -44,6 +43,9 @@ public class ItemContainer extends ItemComponent {
         return visitor.visitItemContainer(this);
     }
 
+    public int getMarketValue() {
+        return 0;
+    }
 
 
 
