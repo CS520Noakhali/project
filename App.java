@@ -1,3 +1,8 @@
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.SocketException;
+import java.net.UnknownHostException;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -22,7 +27,9 @@ public class App extends Application  {
         stage.show();
     }
  
- public static void main(String[] args) {
+ public static void main(String[] args) throws IOException, InterruptedException {
         launch(args);
+       
+		System.exit(0);
     }
 }

@@ -1,8 +1,9 @@
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.net.SocketException;
 import java.net.URL;
-import java.util.ArrayList;
+import java.net.UnknownHostException;
 import java.util.ResourceBundle;
-import javafx.animation.TranslateTransition;
-import javafx.animation.SequentialTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -11,7 +12,6 @@ import javafx.scene.control.TreeItem;
 import javafx.scene.control.TreeView;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
-import javafx.util.Duration;
 import javafx.scene.layout.Pane;
 import javafx.scene.image.Image;
 
@@ -84,6 +84,7 @@ public class DashboardController implements Initializable{
     int X_COORD_LIMIT_NEGATIVE = 0;
     int Y_COORD_LIMIT_POSITIVE = 700;
     int Y_COORD_LIMIT_NEGATIVE = 0;
+    int action = 0;
 
     // variables for main components that should be visible for all methods (root, drone, command center)
     ImageView dummy = null;
@@ -91,9 +92,9 @@ public class DashboardController implements Initializable{
     ImageView drone_view= new ImageView(droneimage);
     Image com_centre_image = new Image(getClass().getResourceAsStream("comm_center.png"));
     ImageView com_centre_view= new ImageView(com_centre_image);
-    ItemComponent rootIC = new ItemContainer("root", 0, 0, 0, 0, 0, 0, 0, dummy);
-    ItemComponent commCenterIC = new ItemContainer("command center", 30, 400, 400, 0, 60,60, 0, com_centre_view);
-    ItemComponent droneIC = new Drone("drone", 1000, 400, 400, 0, 60, 60, 2000, drone_view);
+    ItemComponent rootIC = new ItemContainer("root", 0, 0, 0, 0, 0, 0, dummy);
+    ItemComponent commCenterIC = new ItemContainer("command center", 100, 300, 300, 0, 60,60, com_centre_view);
+    ItemComponent droneIC = new Drone("drone", 10, 300, 300, 0, 60, 60, 10, drone_view);
 
 
     /* 
@@ -147,7 +148,7 @@ public class DashboardController implements Initializable{
         if (selectedItem instanceof ItemContainer) {
             int price, x,y, length, marketValue, width, height;
             length = 0;
-            price = marketValue = 20;
+            price = marketValue = 10;
             x=y=100;
             width=height=20;
             
@@ -194,9 +195,9 @@ public class DashboardController implements Initializable{
         ItemComponent selectedItem = selectedTreeItem.getValue();
 
         if (selectedItem instanceof ItemContainer) {
-            int price, x,y, marketValue, length, width, height;
-            price = 300;
-            length = marketValue = 0;
+            int price, x,y, length, width, height;
+            price = 100;
+            length = 0;
             x = y = 100;
             width = height = 100;
             
@@ -206,7 +207,7 @@ public class DashboardController implements Initializable{
             containerview.toBack();
     
             // a. Create new ItemContainer and corresponding TreeItem
-            ItemComponent newItemContainer =  new ItemContainer("New Item Container", price, x, y, length, width, height, marketValue, containerview);
+            ItemComponent newItemContainer =  new ItemContainer("New Item Container", price, x, y, length, width, height, containerview);
             TreeItem<ItemComponent> newTreeItemContainer = new TreeItem<>(newItemContainer);
             
             // b. set the image on the farm pane  
@@ -336,7 +337,13 @@ public class DashboardController implements Initializable{
         selectedTreeItem.getValue().setXcoordinate(x);
         selectedTreeItem.getValue().setYcoordinate(y);
         selectedTreeItem.getValue().setPrice(price);
-        selectedTreeItem.getValue().setMarketValue(marketValue);
+        
+        // set market value if that was an Item
+        if (selectedTreeItem.getValue() instanceof Item) {
+            Item obj = (Item) selectedTreeItem.getValue();
+            obj.setMarketValue(marketValue);
+        } 
+        
         
         // adjust position on pane
         selectedTreeItem.getValue().getImageView().setX(selectedTreeItem.getValue().getXcoordinate());
@@ -347,159 +354,6 @@ public class DashboardController implements Initializable{
         treeView.refresh();
     }
 
-    /*
-    * Implements "Return home" functionality of the drone
-    */
-    @FXML
-    void onReturnHomeButtonClick() {
-
-        int x = commCenterIC.getXcoordinate();
-        int y = commCenterIC.getYcoordinate();
-        int w = commCenterIC.getWidth();
-        int h = commCenterIC.getHeight();
-
-        //translate
-        droneIC.getImageView().toFront();
-        TranslateTransition translate = new TranslateTransition();
-        translate.setNode(droneIC.getImageView());
-        translate.setDuration(Duration.millis(500));
-
-        x = (int) x + w/2 - 30; //centering drone over the item
-        y = (int) y + h/2 - 30; //centering drone over item
-
-        int deltaX = x - droneIC.getXcoordinate();
-        int deltaY = y - droneIC.getYcoordinate();
-
-        translate.setByX(deltaX);
-        translate.setByY(deltaY);
-        translate.play();
-
-        // update drone's coordinates
-        droneIC.setXcoordinate(x);
-        droneIC.setYcoordinate(y);
-
-        System.out.println("return to command center");
-
-    }
-
-
-    /*
-     * Function that implements "Scan farm" functionality for the drone
-     */
-    @FXML
-    void onScanFarmButtonClick() {
-
-        X_FINAL_COORD = 0;
-        Y_FINAL_COORD = 0;
-
-        int[][] coordinates = {
-            {0, 700}, 
-            {100, 0},
-            {0, -700},
-            {100, 0},
-            {0, 700},
-            {100, 0},
-            {0, -700},
-            {100, 0},
-            {0, 700},
-            {100, 0},
-            {0, -700}
-        };
-
-        SequentialTransition master = new SequentialTransition();
-
-        ArrayList<TranslateTransition> lst1 = new ArrayList<>();
-
-        droneIC.getImageView().toFront();
-        TranslateTransition initiate = new TranslateTransition();
-        initiate.setNode(droneIC.getImageView());
-        initiate.setDuration(Duration.millis(900));
-        initiate.setByX(20-droneIC.getXcoordinate()); //centering drone to top left
-        initiate.setByY(30-droneIC.getYcoordinate()); 
-        lst1.add(initiate);
-
-        for (int i = 0;i<coordinates.length;i++){
-            TranslateTransition translate = new TranslateTransition();
-            
-            int[] arr = coordinates[i];
-            int x = arr[0];
-            int y = arr[1];
-            
-            translate.setNode(droneIC.getImageView());
-            translate.setDuration((Duration.millis(1000)));
-            translate.setByX(x);
-            translate.setByY(y);
-            
-            X_FINAL_COORD += x;
-            Y_FINAL_COORD += y;
-            
-            lst1.add(translate);
-        }
-
-        for (TranslateTransition t: lst1){
-        master.getChildren().add(t);
-        }
-        master.play();
-        System.out.println("scan farm");
-
-        // update drone's coordinates
-        droneIC.setXcoordinate(520);
-        droneIC.setYcoordinate(30);
-    }
-
-    /*
-     * Function that implements "Visit item" functionality for the drone
-     */
-    @FXML
-    void onVisitItemButtonClick() {
-        int x = Integer.parseInt(xCoordTextField.getText());
-        int y = Integer.parseInt(yCoordTextField.getText());
-        int w = Integer.parseInt(widthTextField.getText());
-        int h = Integer.parseInt(heightTextField.getText());
-
-        //translate
-        droneIC.getImageView().toFront();
-        TranslateTransition translate = new TranslateTransition();
-        translate.setNode(droneIC.getImageView());
-        translate.setDuration(Duration.millis(500));
-
-        x = (int) x + w/2 - 30; //centering drone over the item
-        y = (int) y + h/2 - 30; //centering drone over item
-
-        int deltaX = x - droneIC.getXcoordinate();
-        int deltaY = y - droneIC.getYcoordinate();
-
-        translate.setByX(deltaX);
-        translate.setByY(deltaY);
-        translate.play();
-
-        // update drone's coordinates
-        droneIC.setXcoordinate(x);
-        droneIC.setYcoordinate(y);
-
-        System.out.println("visited item");
-
-    }
-    
-    /*
-     * Function that shows information about the item, when the item is selected in the directory view
-     */
-    @FXML
-    void selectItem(MouseEvent event) {
-        
-    // Get currently selected directory TreeItem 
-    TreeItem<ItemComponent> selectedTreeItem = treeView.getSelectionModel().getSelectedItem();
-    // Get the Item corresponding to the current directory TreeItem and set it in the textFields
-    nameTextField.setText(selectedTreeItem.getValue().getName());
-    lengthTextField.setText(Integer.toString(selectedTreeItem.getValue().getLength()));
-    priceTextField.setText(Integer.toString(selectedTreeItem.getValue().getPrice()));
-    widthTextField.setText(Integer.toString(selectedTreeItem.getValue().getWidth()));
-    xCoordTextField.setText(Integer.toString(selectedTreeItem.getValue().getXcoordinate()));
-    yCoordTextField.setText(Integer.toString(selectedTreeItem.getValue().getYcoordinate()));
-    heightTextField.setText(Integer.toString(selectedTreeItem.getValue().getHeight()));
-    marketPriceTextField.setText(Integer.toString(selectedTreeItem.getValue().getMarketValue()));
-    
-    }
 
     /*
      * Function that calculates the Market Value of the selected item/item container
@@ -543,6 +397,106 @@ public class DashboardController implements Initializable{
         } catch (Exception e) {
             System.out.println("Calculated Purchase Price Text Field error");
         }
+        
+    }
+      /*
+     * Function that shows information about the item, when the item is selected in the directory view
+     */
+    @FXML
+    void selectItem(MouseEvent event) {
+        
+    // Get currently selected directory TreeItem 
+    TreeItem<ItemComponent> selectedTreeItem = treeView.getSelectionModel().getSelectedItem();
+    // Get the Item corresponding to the current directory TreeItem and set it in the textFields
+    nameTextField.setText(selectedTreeItem.getValue().getName());
+    lengthTextField.setText(Integer.toString(selectedTreeItem.getValue().getLength()));
+    priceTextField.setText(Integer.toString(selectedTreeItem.getValue().getPrice()));
+    widthTextField.setText(Integer.toString(selectedTreeItem.getValue().getWidth()));
+    xCoordTextField.setText(Integer.toString(selectedTreeItem.getValue().getXcoordinate()));
+    yCoordTextField.setText(Integer.toString(selectedTreeItem.getValue().getYcoordinate()));
+    heightTextField.setText(Integer.toString(selectedTreeItem.getValue().getHeight()));
+    marketPriceTextField.setText(Integer.toString(selectedTreeItem.getValue().getMarketValue()));
+    
+    }
+
+
+
+    /*
+     * Function that implements "Scan farm" functionality for the drone
+     */
+    @FXML
+    void onScanFarmButtonClick() {
+        action = 2; 
+
+        SimulationAdapter sim = new SimulationAdapter();
+        sim.goScanFarm();
+        
+    }
+
+    /*
+     * Function that implements "Visit item" functionality for the drone
+     */
+    @FXML
+    void onVisitItemButtonClick() {
+        action = 3;
+
+        int x = Integer.parseInt(xCoordTextField.getText());
+        int y = Integer.parseInt(yCoordTextField.getText());
+        int w = Integer.parseInt(widthTextField.getText());
+        int h = Integer.parseInt(heightTextField.getText());
+        
+
+        x = (int) x + w/2 - 30; //centering drone over the item
+        y = (int) y + h/2 - 30; //centering drone over item
+        System.out.println(x + "and " + y);
+        SimulationAdapter sim = new SimulationAdapter();
+        sim.gotoXY(x, y, 0);
+        System.out.println("visited item");
+
+        // x = commCenterIC.getXcoordinate();
+        // y = commCenterIC.getYcoordinate();
+        // w = commCenterIC.getWidth();
+        // h = commCenterIC.getHeight();
+        // x = (int) x + w/2 - 30; //centering drone over the item
+        // y = (int) y + h/2 - 30; //centering drone over item
+        // System.out.println(x + "and " + y);
+        // SimulationAdapter sim1 = new SimulationAdapter();
+        // sim1.gotoXY(x, y, 0);
+        // System.out.println("return to command center");
+        
+
+    }
+    
+    /*
+    * Launches physical Tello Drone to minic simulated drone action
+    */
+    @FXML
+    void onLaunchDroneButtonClick() throws IOException, InterruptedException {
+        System.out.println("Launching Drone");
+        TelloDrone tello = new TelloDrone();
+		tello.activateSDK();
+		tello.hoverInPlace(10);
+		tello.takeoff();
+		
+        
+        if (action == 2){
+            //scan farm
+            System.out.println("scan farm");
+            tello.goScanFarm();
+        }
+        else if (action == 3){
+            //visit item
+            System.out.println("visit item");
+            tello.turnCCW(40);
+            tello.flyForward(100);
+            tello.turnCW(180);
+            tello.flyForward(100);
+            tello.turnCW(180-40);
+
+            //tello.gotoXY(Integer.parseInt(xCoordTextField.getText())/10, Integer.parseInt(yCoordTextField.getText())/10, 1);
+        }
+        tello.land();
+		tello.end();
         
     }
 

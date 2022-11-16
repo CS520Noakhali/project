@@ -13,13 +13,12 @@ abstract class ItemComponent {
     private int length;
     private int width;
     private int height;
-    private int marketValue;
     
     @FXML
     private ImageView imageview;
     
 
-    public ItemComponent(String name, int price, int x, int y, int length, int width, int height, int marketValue, ImageView imageview) {
+    public ItemComponent(String name, int price, int x, int y, int length, int width, int height, ImageView imageview) {
         this.name = name;
         this.price = price;
         this.xCoordinate = x;
@@ -27,7 +26,6 @@ abstract class ItemComponent {
         this.length = length;
         this.width = width;
         this.height = height;
-        this.marketValue = marketValue;
         this.imageview=imageview;
     }
 
@@ -99,18 +97,13 @@ abstract class ItemComponent {
     	this.imageview=imageview;
     }
 
-    public int getMarketValue() {
-    	return this.marketValue;
-    }
-
-    public void setMarketValue(int marketValue) {
-    	this.marketValue = marketValue;
-    }
     
     @Override
     public String toString() {
         return this.name;
     }
+
+    abstract int getMarketValue();
 
 
     // debug purpose
@@ -119,7 +112,6 @@ abstract class ItemComponent {
     	System.out.println("X cord : "+ this.getXcoordinate() + " Y cord: " + this.getYcoordinate());
     	System.out.println("Length : "+ this.getLength() + " Width: " + this.getWidth() + "height :" + this.getHeight());
     	System.out.println("price : "+ this.getPrice());
-        System.out.println("market value : "+ this.getMarketValue());
     	
     }
 
@@ -131,7 +123,7 @@ abstract class ItemComponent {
     abstract void add(ItemComponent itemComponent);
         
     abstract void delete(ItemComponent itemComponent);
-
+    
     abstract int accept(AbstractVisitor visitor);
     
 }
