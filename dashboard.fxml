@@ -183,23 +183,23 @@
                                                    <children>
                                                       <VBox layoutX="99.0" layoutY="-10.0" prefHeight="154.66666666666666" prefWidth="298.6666666666667" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                                                          <children>
-                                                            <HBox prefHeight="100.0" prefWidth="200.0">
+                                                            <HBox prefHeight="60.0" prefWidth="200.0">
                                                                <children>
-                                                                  <Button fx:id="visitItemButton" mnemonicParsing="false" onMouseClicked="#onVisitItemButtonClick" prefHeight="156.0" prefWidth="150.0" text="Visit Item" textAlignment="CENTER" wrapText="true">
+                                                                  <Button fx:id="visitItemButton" mnemonicParsing="false" onMouseClicked="#onVisitItemButtonClick" prefHeight="100.0" prefWidth="150.0" text="Visit Item" textAlignment="CENTER" wrapText="true">
                                                                      <font>
-                                                                        <Font size="24.0" />
+                                                                        <Font size="14.0" />
                                                                      </font>
                                                                   </Button>
-                                                                  <Button fx:id="scanFarmButton" mnemonicParsing="false" onMouseClicked="#onScanFarmButtonClick" prefHeight="156.0" prefWidth="150.0" text="Scan Farm" textAlignment="CENTER" wrapText="true">
+                                                                  <Button fx:id="scanFarmButton" mnemonicParsing="false" onMouseClicked="#onScanFarmButtonClick" prefHeight="100.0" prefWidth="150.0" text="Scan Farm" textAlignment="CENTER" wrapText="true">
                                                                      <font>
-                                                                        <Font size="24.0" />
+                                                                        <Font size="14.0" />
                                                                      </font>
                                                                   </Button>
                                                                </children>
                                                             </HBox>
-                                                            <Button fx:id="returnHomeButton" mnemonicParsing="false" onMouseClicked="#onReturnHomeButtonClick" prefHeight="50.0" prefWidth="300.0" text="Return Home" textAlignment="CENTER" wrapText="true">
+                                                            <Button fx:id="launchDroneButton" mnemonicParsing="false" onMouseClicked="#onLaunchDroneButtonClick" prefHeight="50.0" prefWidth="300.0" text="Launch Drone">
                                                                <font>
-                                                                  <Font size="24.0" />
+                                                                  <Font size="18.0" />
                                                                </font>
                                                             </Button>
                                                          </children>
