@@ -274,40 +274,122 @@ public class TelloDrone extends MultiRotorDrone {
 
 	}
 
-
 	/***
 	 * 
 	 * @param x
 	 * @param y
 	 * @param speed
+	 * @throws IOException 
 	 */
-	public void gotoXY(int x, int y, int speed) {
-		//visit item
+	public void gotoXY(int x, int y, int speed) throws IOException {
+		int z = 0;
+		double slope = (double)y/x;
+		//System.out.println(slope);
+		if (speed > maxSpeed) speed = maxSpeed;
+		else if (speed < minSpeed) speed = minSpeed;
+		if (x <= maxGoto && x >= minGoto && y <= maxGoto && y >= minGoto) {
+			//System.out.println(String.format("go %1$d %2$d %3$d %4$d", x, -y, z, speed));
+			this.controller.sendCommand(String.format("go %1$d %2$d %3$d %4$d", x, -y, z, speed));
+		}
+		else if ((x > maxGoto && y <= maxGoto && y >= minGoto) || ((x > maxGoto || x < minGoto) && (y > maxGoto || y < minGoto) && (Math.abs(x) > Math.abs(y)) && (x > maxGoto))) {
+			int partialY = (int) Math.round(slope * maxGoto);
+			//System.out.println(String.format("go %1$d %2$d %3$d %4$d", maxGoto, -partialY, z, speed));
+			this.controller.sendCommand(String.format("go %1$d %2$d %3$d %4$d", maxGoto, -partialY, z, speed));
+			gotoXY(x + minGoto, y - partialY, speed);
+		}
+		else if ((x < minGoto && y <= maxGoto && y >= minGoto) || (((x > maxGoto || x < minGoto) && (y > maxGoto || y < minGoto)) && (Math.abs(x) > Math.abs(y)) && (x < minGoto))) {
+			int partialY = (int) Math.round(slope * minGoto);
+			//System.out.println(String.format("go %1$d %2$d %3$d %4$d", minGoto, -partialY, z, speed));
+			this.controller.sendCommand(String.format("go %1$d %2$d %3$d %4$d", minGoto, partialY, z, speed));
+			gotoXY(x + maxGoto, y - partialY, speed);
+		}
+		else if ((y > maxGoto && x <= maxGoto && x >= minGoto) || (((x > maxGoto || x < minGoto) && (y > maxGoto || y < minGoto)) && (Math.abs(y) > Math.abs(x)) && (y > maxGoto))) {
+			int partialX = (int) Math.round(maxGoto/slope);
+			//System.out.println(String.format("go %1$d %2$d %3$d %4$d", partialX, minGoto, z, speed));
+			this.controller.sendCommand(String.format("go %1$d %2$d %3$d %4$d", partialX, minGoto, z, speed));
+			gotoXY(x - partialX, y + minGoto, speed);
+		}
+		else if ((y < minGoto && x <= maxGoto && x >= minGoto) || (((x > maxGoto || x < minGoto) && (y > maxGoto || y < minGoto)) && (Math.abs(y) > Math.abs(x)) && (y < maxGoto))) {
+			int partialX = (int) Math.round(minGoto/slope);
+			//System.out.println(String.format("go %1$d %2$d %3$d %4$d", partialX, maxGoto, z, speed));
+			this.controller.sendCommand(String.format("go %1$d %2$d %3$d %4$d", partialX, maxGoto, z, speed));
+			gotoXY(x - partialX, y + maxGoto, speed);
+		}
+		else {
+			if (x > maxGoto && y < minGoto) {
+				//System.out.println(String.format("go %1$d %2$d %3$d %4$d", maxGoto, maxGoto, z, speed));
+				this.controller.sendCommand(String.format("go %1$d %2$d %3$d %4$d", maxGoto, maxGoto, z, speed));
+				gotoXY(x + minGoto, y + maxGoto, speed);
+			}
+			else if (x < minGoto && y > maxGoto) {
+				//System.out.println(String.format("go %1$d %2$d %3$d %4$d", minGoto, minGoto, z, speed));
+				this.controller.sendCommand(String.format("go %1$d %2$d %3$d %4$d", minGoto, minGoto, z, speed));
+				gotoXY(x + maxGoto, y + minGoto, speed);
+			}
+			else if (x > maxGoto && x == y) {
+				//System.out.println(String.format("go %1$d %2$d %3$d %4$d", maxGoto, minGoto, z, speed));
+				this.controller.sendCommand(String.format("go %1$d %2$d %3$d %4$d", maxGoto, minGoto, z, speed));
+				gotoXY(x + minGoto, y + minGoto, speed);
+			}
+			else {
+				//System.out.println(String.format("go %1$d %2$d %3$d %4$d", minGoto, maxGoto, z, speed));
+				this.controller.sendCommand(String.format("go %1$d %2$d %3$d %4$d", minGoto, maxGoto, z, speed));
+				gotoXY(x + maxGoto, y + maxGoto, speed);
+			}
+		}
+	}
 
-	}	
 	@Override
 	public void goScanFarm() {
 		System.out.println("tello drone to scan farm");
         try {
-			turnCW(180);
-			flyForward(100);
-        	turnCCW(90);
-    		flyForward(10);
-			turnCCW(90);
-    		flyForward(100);
-			turnCW(90);
-    		flyForward(10);
-			turnCW(90);
-    		flyForward(100);
-			turnCCW(90);
-    		flyForward(10);
-			turnCCW(90);
-    		flyForward(100);
-			turnCW(90);
-    		flyForward(10);
-			turnCW(90);
-    		flyForward(100);
+			// turnCW(180);
+			// flyForward(100);
+        	// turnCCW(90);
+    		// flyForward(10);
+			// turnCCW(90);
+    		// flyForward(100);
+			// turnCW(90);
+    		// flyForward(10);
+			// turnCW(90);
+    		// flyForward(100);
+			// turnCCW(90);
+    		// flyForward(10);
+			// turnCCW(90);
+    		// flyForward(100);
+			// turnCW(90);
+    		// flyForward(10);
+			// turnCW(90);
+    		// flyForward(100);
+
+			// Ian's testing area
+			// refactor to for loop
+
+			int scalar = 1;
+
+			for (int i = 0; i < scalar; i++) {
+
+				
+				flyForward(80);
+				turnCCW(90);
+				
+				flyForward(30);
+				turnCCW(90);
+				
+				flyForward(80);
+				turnCW(90);
+				
+				flyForward(30);
+				turnCW(90);
+			
+			}
         	
+			flyForward(80);
+
+
+
+			gotoXY(-60 * scalar, 80, 20);
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

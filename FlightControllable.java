@@ -135,7 +135,7 @@ interface FlightControllable {
 	 */
 	public int getTOF() throws IOException;
 
-	public void gotoXY(int x, int y, int speed);
+	public void gotoXY(int x, int y, int speed) throws IOException;
 	public void gotoXYZ(int x, int y, int z, int speed) throws IOException;
 	public void goScanFarm();
 

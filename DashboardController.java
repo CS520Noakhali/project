@@ -93,8 +93,8 @@ public class DashboardController implements Initializable{
     Image com_centre_image = new Image(getClass().getResourceAsStream("comm_center.png"));
     ImageView com_centre_view= new ImageView(com_centre_image);
     ItemComponent rootIC = new ItemContainer("root", 0, 0, 0, 0, 0, 0, dummy);
-    ItemComponent commCenterIC = new ItemContainer("command center", 100, 300, 300, 0, 60,60, com_centre_view);
-    ItemComponent droneIC = new Drone("drone", 10, 300, 300, 0, 60, 60, 10, drone_view);
+    ItemComponent commCenterIC = new ItemContainer("command center", 100, 0, 0, 0, 60,60, com_centre_view);
+    ItemComponent droneIC = new Drone("drone", 10, 0, 0, 0, 60, 60, 10, drone_view);
 
 
     /* 
@@ -477,8 +477,12 @@ public class DashboardController implements Initializable{
 		tello.activateSDK();
 		tello.hoverInPlace(10);
 		tello.takeoff();
-		
+
+
+		// test gotoXY
+        // tello.gotoXY(100, 100, 20);
         
+
         if (action == 2){
             //scan farm
             System.out.println("scan farm");
@@ -487,13 +491,18 @@ public class DashboardController implements Initializable{
         else if (action == 3){
             //visit item
             System.out.println("visit item");
-            tello.turnCCW(40);
-            tello.flyForward(100);
-            tello.turnCW(180);
-            tello.flyForward(100);
-            tello.turnCW(180-40);
+            // tello.turnCCW(40);
+            // tello.flyForward(100);
+            // tello.turnCW(180);
+            // tello.flyForward(100);
+            // tello.turnCW(180-40);
 
-            //tello.gotoXY(Integer.parseInt(xCoordTextField.getText())/10, Integer.parseInt(yCoordTextField.getText())/10, 1);
+            tello.gotoXY(Integer.parseInt(xCoordTextField.getText())/10, Integer.parseInt(yCoordTextField.getText())/10, 1);
+
+            tello.turnCW(360);
+
+            tello.gotoXY(-(Integer.parseInt(xCoordTextField.getText())/10), -(Integer.parseInt(yCoordTextField.getText())/10), 1);
+
         }
         tello.land();
 		tello.end();
