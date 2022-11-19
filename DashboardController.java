@@ -1,8 +1,5 @@
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.SocketException;
 import java.net.URL;
-import java.net.UnknownHostException;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -84,7 +81,10 @@ public class DashboardController implements Initializable{
     int X_COORD_LIMIT_NEGATIVE = 0;
     int Y_COORD_LIMIT_POSITIVE = 700;
     int Y_COORD_LIMIT_NEGATIVE = 0;
-    int action = 0;
+
+    // sets the action code after simulated drone performed an action.
+    // Necessary for the TelloDrone to know what action to mimick
+    int action = 0;  
 
     // variables for main components that should be visible for all methods (root, drone, command center)
     ImageView dummy = null;
@@ -399,6 +399,9 @@ public class DashboardController implements Initializable{
         }
         
     }
+
+
+
       /*
      * Function that shows information about the item, when the item is selected in the directory view
      */
@@ -422,10 +425,14 @@ public class DashboardController implements Initializable{
 
 
     /*
-     * Function that implements "Scan farm" functionality for the drone
+     * Function that implements "Scan farm" functionality for the simulated drone.
+     * Uses Adapter class.
      */
     @FXML
     void onScanFarmButtonClick() {
+
+        // save the action flag, 3 = visit item action. 
+        // Needed so that Tello Drone knows what action to mimick when the user clicks Launch Drone
         action = 2; 
 
         SimulationAdapter sim = new SimulationAdapter();
@@ -434,55 +441,48 @@ public class DashboardController implements Initializable{
     }
 
     /*
-     * Function that implements "Visit item" functionality for the drone
+     * Function that implements "Visit item" functionality for the simulated drone
+     * Uses Adapter class
      */
     @FXML
     void onVisitItemButtonClick() {
-        action = 3;
 
+         // save the action flag, 3 = visit item action. 
+         // Needed so that Tello Drone knows what action to mimick when the user clicks Launch Drone
+        action = 3; 
+
+        // get item coordinates
         int x = Integer.parseInt(xCoordTextField.getText());
         int y = Integer.parseInt(yCoordTextField.getText());
         int w = Integer.parseInt(widthTextField.getText());
         int h = Integer.parseInt(heightTextField.getText());
         
 
-        x = (int) x + w/2 - 30; //centering drone over the item
-        y = (int) y + h/2 - 30; //centering drone over item
+        x = (int) x + w/2 - 30; //centering drone over the item (x)
+        y = (int) y + h/2 - 30; //centering drone over the item (y)
         System.out.println(x + "and " + y);
+
+        // Create Adapter object and run the corresponding method on it
         SimulationAdapter sim = new SimulationAdapter();
         sim.gotoXY(x, y, 0);
-        System.out.println("visited item");
-
-        // x = commCenterIC.getXcoordinate();
-        // y = commCenterIC.getYcoordinate();
-        // w = commCenterIC.getWidth();
-        // h = commCenterIC.getHeight();
-        // x = (int) x + w/2 - 30; //centering drone over the item
-        // y = (int) y + h/2 - 30; //centering drone over item
-        // System.out.println(x + "and " + y);
-        // SimulationAdapter sim1 = new SimulationAdapter();
-        // sim1.gotoXY(x, y, 0);
-        // System.out.println("return to command center");
-        
+        System.out.println("visited item");        
 
     }
     
+
     /*
-    * Launches physical Tello Drone to minic simulated drone action
+    * Launches physical Tello Drone to mimic simulated drone action
     */
     @FXML
     void onLaunchDroneButtonClick() throws IOException, InterruptedException {
         System.out.println("Launching Drone");
+
+        // Create an instance of the TEllo Drone and perform necessary methods on it
         TelloDrone tello = new TelloDrone();
 		tello.activateSDK();
 		tello.hoverInPlace(10);
 		tello.takeoff();
-
-
-		// test gotoXY
-        // tello.gotoXY(100, 100, 20);
         
-
         if (action == 2){
             //scan farm
             System.out.println("scan farm");
@@ -491,11 +491,6 @@ public class DashboardController implements Initializable{
         else if (action == 3){
             //visit item
             System.out.println("visit item");
-            // tello.turnCCW(40);
-            // tello.flyForward(100);
-            // tello.turnCW(180);
-            // tello.flyForward(100);
-            // tello.turnCW(180-40);
 
             tello.gotoXY(Integer.parseInt(xCoordTextField.getText())/10, Integer.parseInt(yCoordTextField.getText())/10, 1);
 

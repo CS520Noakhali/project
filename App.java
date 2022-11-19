@@ -1,8 +1,4 @@
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.net.SocketException;
-import java.net.UnknownHostException;
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -10,7 +6,9 @@ import javafx.scene.Scene;
 
 import javafx.stage.Stage;
 
- 
+/*
+ * Driver class. Runs the application
+ */
 public class App extends Application  {
 
     @Override

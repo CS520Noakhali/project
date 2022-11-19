@@ -2,6 +2,10 @@ import java.io.*;
 import java.net.*;
 import java.util.Scanner;
 
+/*
+ * Drone controller class. Contains method for ssetting the connection with the physical drone 
+ * and for sending commands to the drone
+ */
 public class DroneController {
 
 	private DatagramSocket hostSocket;
