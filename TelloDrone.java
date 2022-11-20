@@ -5,14 +5,17 @@ import java.net.UnknownHostException;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
-
+/*
+ * Tello Drone class representing the physical tello drone. Contains implementations of methods for controlling the drone.
+ * 
+ */
 public class TelloDrone extends MultiRotorDrone {
 
 	private final int maxGoto = 500, minGoto = -500, minDist = 20, maxSpeed = 100, minSpeed = 10, maxDegrees = 360, minDegrees = 1;
 	private final int maxDist = maxGoto;
 	// private StreamPlayer flightCamera;
 	// private StreamRecorder flightRecorder;
-	//private String filePath = "/Users/MasterControlProgram/git/jdrone/src/VideoRecv.mp4";
+	// private String filePath = "/Users/MasterControlProgram/git/jdrone/src/VideoRecv.mp4";
 
 	/***
 	 * 
@@ -24,6 +27,45 @@ public class TelloDrone extends MultiRotorDrone {
 		this.controller = new DroneController(9000, 8889, "192.168.10.1");
 		// flightCamera = new StreamPlayer(11111);
 		// flightRecorder = new StreamRecorder(11111);
+	}
+
+
+	/*
+	 * Implements scan farm functionality of the tello drone
+	 * Size of the farm: 0.8 x 0.6 meters.
+	 */
+	@Override
+	public void goScanFarm() {
+		System.out.println("tello drone to scan farm");
+        try {
+
+			int scalar = 1;
+
+			for (int i = 0; i < scalar; i++) {
+
+				flyForward(80);
+				turnCCW(90);
+				
+				flyForward(30);
+				turnCCW(90);
+				
+				flyForward(80);
+				turnCW(90);
+				
+				flyForward(30);
+				turnCW(90);
+			
+			}
+        	
+			flyForward(80);
+
+			// return to the command center
+			gotoXY(-60 * scalar, 80, 20);
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
 	}
 
 	/***
@@ -339,62 +381,7 @@ public class TelloDrone extends MultiRotorDrone {
 		}
 	}
 
-	@Override
-	public void goScanFarm() {
-		System.out.println("tello drone to scan farm");
-        try {
-			// turnCW(180);
-			// flyForward(100);
-        	// turnCCW(90);
-    		// flyForward(10);
-			// turnCCW(90);
-    		// flyForward(100);
-			// turnCW(90);
-    		// flyForward(10);
-			// turnCW(90);
-    		// flyForward(100);
-			// turnCCW(90);
-    		// flyForward(10);
-			// turnCCW(90);
-    		// flyForward(100);
-			// turnCW(90);
-    		// flyForward(10);
-			// turnCW(90);
-    		// flyForward(100);
 
-			// Ian's testing area
-			// refactor to for loop
-
-			int scalar = 1;
-
-			for (int i = 0; i < scalar; i++) {
-
-				
-				flyForward(80);
-				turnCCW(90);
-				
-				flyForward(30);
-				turnCCW(90);
-				
-				flyForward(80);
-				turnCW(90);
-				
-				flyForward(30);
-				turnCW(90);
-			
-			}
-        	
-			flyForward(80);
-
-
-
-			gotoXY(-60 * scalar, 80, 20);
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		
-	}
 	//---------------
 	/***
 	 * SDK 2.0 only

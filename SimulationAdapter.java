@@ -14,113 +14,10 @@ public class SimulationAdapter implements FlightControllable{
         
     }
     DashboardController dashboardController = DashboardController.getInstance();
-    @Override
-    public void takeoff() throws IOException {
-        // TODO Auto-generated method stub
-        
-    }
 
-    @Override
-    public void land() throws IOException {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public void increaseAltitude(int up) throws IOException {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public void decreaseAltitude(int down) throws IOException {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public void flyForward(int front) throws IOException {
-        
-        
-    }
-
-    @Override
-    public void flyLeft(int left) throws IOException {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public void flyRight(int right) throws IOException {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public void turnCW(int degrees) throws IOException {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public void turnCCW(int degrees) throws IOException {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public int getFlightTime() throws IOException {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    @Override
-    public int getHeight() throws IOException {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    @Override
-    public int getAttitudePitch() throws IOException {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    @Override
-    public int getAttitudeRoll() throws IOException {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    @Override
-    public int getAttitudeYaw() throws IOException {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    @Override
-    public double getAccelerationX() throws IOException {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    @Override
-    public double getAccelerationY() throws IOException {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    @Override
-    public double getAccelerationZ() throws IOException {
-        // TODO Auto-generated method stub
-        return 0;
-    }
-
-    @Override
-    public int getTOF() throws IOException {
-        // TODO Auto-generated method stub
-        return 0;
-    }
+    /*
+     * Implementation of the gotoXY method for the simulated drone.
+     */
     @Override
     public void gotoXY(int x, int y, int speed) {
         //translate
@@ -217,10 +114,6 @@ public class SimulationAdapter implements FlightControllable{
         lst1.add(translate2);
         master.getChildren().add(translate2);
         
-
-        // for (TranslateTransition t: lst1){
-        // master.getChildren().add(t);
-        // }
         master.play();
         System.out.println("visit item idk");
 
@@ -228,31 +121,22 @@ public class SimulationAdapter implements FlightControllable{
         dashboardController.droneIC.setXcoordinate(dashboardController.commCenterIC.getXcoordinate());
         dashboardController.droneIC.setYcoordinate(dashboardController.commCenterIC.getYcoordinate());
         
-
-        
-    }
-    @Override
-    public void gotoXYZ(int x, int y, int z, int speed) throws IOException {
-        // TODO Auto-generated method stub
-        
     }
 
+
+    /*
+     * Implementation of the goScanFarm method for the simulated drone.
+     */
     public void goScanFarm() {
         dashboardController.X_FINAL_COORD = 0;
         dashboardController.Y_FINAL_COORD = 0;
 
         int x1 = dashboardController.commCenterIC.getXcoordinate();
         int y1 = dashboardController.commCenterIC.getYcoordinate();
-        int w1 = dashboardController.commCenterIC.getWidth();
-        int h1 = dashboardController.commCenterIC.getHeight();
-        // x1 = (int) x1 + w1/2 - 30; //centering drone over the item
-        // y1 = (int) y1 + h1/2 - 30; //centering drone over item
 
         int deltaX1 =  -520 + x1 ;
         int deltaY1 = y1 - 30;
         
-
-
         int[][] coordinates = {
             {0, 700}, 
             {100, 0},
@@ -309,7 +193,122 @@ public class SimulationAdapter implements FlightControllable{
         dashboardController.droneIC.setXcoordinate(dashboardController.commCenterIC.getXcoordinate());
         dashboardController.droneIC.setYcoordinate(dashboardController.commCenterIC.getYcoordinate());
         
+    }
 
+    // Next follows methods that do not need to be implemented by the simulated drone
+
+    @Override
+    public void takeoff() throws IOException {
+        // TODO Auto-generated method stub
         
     }
+
+    @Override
+    public void land() throws IOException {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void increaseAltitude(int up) throws IOException {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void decreaseAltitude(int down) throws IOException {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void flyForward(int front) throws IOException {
+        // TODO Auto-generated method stub
+    }
+
+    @Override
+    public void flyLeft(int left) throws IOException {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void flyRight(int right) throws IOException {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void turnCW(int degrees) throws IOException {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void turnCCW(int degrees) throws IOException {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public int getFlightTime() throws IOException {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    @Override
+    public int getHeight() throws IOException {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    @Override
+    public int getAttitudePitch() throws IOException {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    @Override
+    public int getAttitudeRoll() throws IOException {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    @Override
+    public int getAttitudeYaw() throws IOException {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    @Override
+    public double getAccelerationX() throws IOException {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    @Override
+    public double getAccelerationY() throws IOException {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    @Override
+    public double getAccelerationZ() throws IOException {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    @Override
+    public int getTOF() throws IOException {
+        // TODO Auto-generated method stub
+        return 0;
+    }
+
+    @Override
+    public void gotoXYZ(int x, int y, int z, int speed) throws IOException {
+        // TODO Auto-generated method stub
+        
+    }
+
+ 
 }
