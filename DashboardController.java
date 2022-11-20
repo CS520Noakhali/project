@@ -472,6 +472,7 @@ public class DashboardController implements Initializable{
 
     /*
     * Launches physical Tello Drone to mimic simulated drone action
+    * Size of the farm: 0.8 x 0.6 meters
     */
     @FXML
     void onLaunchDroneButtonClick() throws IOException, InterruptedException {
